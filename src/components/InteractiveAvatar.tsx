@@ -129,7 +129,11 @@ function InteractiveAvatar({ showConfig = false, onCloseConfig }: InteractiveAva
   return (
     <div className="w-full h-full flex flex-col">
       <div className="flex flex-col w-full h-full overflow-hidden">
-        {sessionState === StreamingAvatarSessionState.CONNECTED ? (
+        {showConfig ? (
+            <div className="relative">
+              <AvatarConfig config={config} onConfigChange={setConfig} onClose={onCloseConfig} />
+            </div>
+          ) : sessionState === StreamingAvatarSessionState.CONNECTED ? (
             <AvatarVideo ref={mediaStream} />
           ) : sessionState === StreamingAvatarSessionState.CONNECTING ? (
             <div className="flex items-center justify-center h-64 text-white text-lg">
@@ -137,17 +141,6 @@ function InteractiveAvatar({ showConfig = false, onCloseConfig }: InteractiveAva
                 <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
                 <div>Connecting to avatar...</div>
               </div>
-            </div>
-          ) : showConfig ? (
-            <div className="relative">
-              <AvatarConfig config={config} onConfigChange={setConfig} />
-              <Button 
-                onClick={onCloseConfig}
-                className="absolute top-2 right-2 bg-gray-700 hover:bg-gray-600 text-white"
-                size="sm"
-              >
-                ✕
-              </Button>
             </div>
           ) : null}
         </div>
