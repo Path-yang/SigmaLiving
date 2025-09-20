@@ -1,55 +1,39 @@
+import { Hero } from '@/components/Hero'
+import { FeatureCard } from '@/components/FeatureCard'
+
 export default function HomePage() {
   return (
-    <div className="space-y-8">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold text-gray-900 mb-4">
-          Welcome to SilverSigma
-        </h1>
-        <p className="text-lg text-gray-600 mb-8">
-          Your AI companion for seniors in Singapore
-        </p>
-      </div>
+    <div className="space-y-16">
+      <Hero />
       
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="bg-white p-6 rounded-lg shadow-md">
-          <h2 className="text-xl font-semibold text-gray-900 mb-3">Talk to AI</h2>
-          <p className="text-gray-600 mb-4">
-            Have conversations with our friendly AI companion using voice or text.
-          </p>
-          <a 
-            href="/assistant" 
-            className="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors"
-          >
-            Start Chatting
-          </a>
-        </div>
+      <section className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <FeatureCard
+          icon="🤖"
+          title="Talk to AI"
+          desc="Have meaningful conversations with our friendly AI companion using voice or text. Get help, advice, or just chat whenever you need someone to talk to."
+          href="/assistant"
+          testId="feature-ai"
+          cardNumber={1}
+        />
         
-        <div className="bg-white p-6 rounded-lg shadow-md">
-          <h2 className="text-xl font-semibold text-gray-900 mb-3">Share Moments</h2>
-          <p className="text-gray-600 mb-4">
-            Share photos and updates with your family and friends.
-          </p>
-          <a 
-            href="/feed" 
-            className="inline-block bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition-colors"
-          >
-            View Feed
-          </a>
-        </div>
-        
-        <div className="bg-white p-6 rounded-lg shadow-md">
-          <h2 className="text-xl font-semibold text-gray-900 mb-3">Learn Hobbies</h2>
-          <p className="text-gray-600 mb-4">
-            Discover new hobbies and activities to keep you engaged.
-          </p>
-          <a 
-            href="/hobbies" 
-            className="inline-block bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 transition-colors"
-          >
-            Explore Hobbies
-          </a>
-        </div>
-      </div>
+        <FeatureCard
+          icon="❤️"
+          title="Learn Hobbies"
+          desc="Discover new hobbies and activities to keep you engaged and active. From gardening tips to cooking recipes, explore what interests you most."
+          href="/hobbies"
+          testId="feature-hobbies"
+          cardNumber={3}
+        />
+
+        <FeatureCard
+          icon="📱"
+          title="Share Moments"
+          desc="Share photos and updates with your family and friends easily. Stay connected with your loved ones and never miss important moments."
+          href="/feed"
+          testId="feature-feed"
+          cardNumber={2}
+        />
+      </section>
     </div>
   );
 }

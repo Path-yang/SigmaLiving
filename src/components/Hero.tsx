@@ -3,64 +3,39 @@
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { MessageSquareDashed, HeartHandshake, Camera } from '@/app/(marketing)/icons'
+import { SilverSigmaLogo } from '@/components/SilverSigmaLogo'
 
 export function Hero() {
   return (
-    <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 rounded-2xl p-8 mb-8 relative overflow-hidden">
-      {/* Decorative elements */}
-      <div className="absolute top-4 right-4 text-6xl opacity-20">
-        👋
-      </div>
-      <div className="absolute bottom-4 left-4 text-4xl opacity-20">
-        🌟
-      </div>
-      
-      <div className="relative z-10">
-        <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-          Welcome to SilverCircle
+    <div className="hero-background rounded-3xl p-16 mb-16 relative overflow-hidden shadow-2xl">
+      <div className="relative z-10 text-center">
+        <div className="flex items-center justify-center mb-8">
+          <SilverSigmaLogo 
+            width={120}
+            height={120}
+            className="w-[120px] h-[120px]"
+          />
+        </div>
+        <h1 className="text-5xl lg:text-6xl font-extrabold text-gray-900 mb-6 text-center tracking-tight">
+          Welcome to SilverSigma
         </h1>
-        <p className="text-xl text-gray-700 mb-8 max-w-2xl leading-relaxed">
-          A simple, friendly app to chat with your AI companion, learn hobbies, and share moments with family and friends.
+        <p className="text-xl lg:text-2xl text-gray-700 mb-12 max-w-3xl leading-relaxed text-center mx-auto">
+          Let's live a healthier and fulfilling life together!
         </p>
         
-        <div className="flex flex-col sm:flex-row gap-4">
-          <Link href="/assistant">
-            <Button 
-              size="lg" 
-              className="btn-senior-lg bg-blue-600 hover:bg-blue-700 text-white"
-              data-testid="hero-cta-assistant"
-            >
-              <MessageSquareDashed className="w-6 h-6 mr-2" />
-              Try AI Companion
-            </Button>
-          </Link>
-          
-          <Link href="/hobbies">
-            <Button 
-              variant="outline" 
-              size="lg" 
-              className="btn-senior-lg border-blue-600 text-blue-600 hover:bg-blue-50"
-              data-testid="hero-cta-hobbies"
-            >
-              <HeartHandshake className="w-6 h-6 mr-2" />
-              Explore Hobbies
-            </Button>
-          </Link>
-        </div>
-        
         {/* Feature highlights */}
-        <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div className="flex items-center space-x-2 text-gray-600">
-            <MessageSquareDashed className="w-5 h-5 text-blue-500" />
-            <span className="text-sm font-medium">Voice & Text Chat</span>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-4xl mx-auto">
+          <div className="flex items-center justify-center space-x-3 text-gray-700 bg-white/60 rounded-xl p-4 backdrop-blur-sm">
+            <MessageSquareDashed className="w-6 h-6 text-blue-500" />
+            <span className="text-base font-semibold">Get your own companion!</span>
           </div>
-          <div className="flex items-center space-x-2 text-gray-600">
-            <HeartHandshake className="w-5 h-5 text-green-500" />
-            <span className="text-sm font-medium">Find Hobby Buddies</span>
+          <div className="flex items-center justify-center space-x-3 text-gray-700 bg-white/60 rounded-xl p-4 backdrop-blur-sm">
+            <HeartHandshake className="w-6 h-6 text-green-500" />
+            <span className="text-base font-semibold">Find Hobby Buddies!</span>
           </div>
-          <div className="flex items-center space-x-2 text-gray-600">
-            <Camera className="w-5 h-5 text-purple-500" />
-            <span className="text-sm font-medium">Share Safely</span>
+          <div className="flex items-center justify-center space-x-3 text-gray-700 bg-white/60 rounded-xl p-4 backdrop-blur-sm">
+            <Camera className="w-6 h-6 text-purple-500" />
+            <span className="text-base font-semibold">Share Moments with friends!</span>
           </div>
         </div>
       </div>
