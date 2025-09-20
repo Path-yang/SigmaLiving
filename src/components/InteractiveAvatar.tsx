@@ -10,7 +10,7 @@ import {
 import { useEffect, useRef, useState } from "react";
 import { useMemoizedFn, useUnmount } from "ahooks";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "./Button";
 import { AvatarConfig } from "./AvatarConfig";
 import { AvatarVideo } from "./AvatarSession/AvatarVideo";
 import { useStreamingAvatarSession } from "./logic/useStreamingAvatarSession";
@@ -38,12 +38,7 @@ const DEFAULT_CONFIG: StartAvatarRequest = {
   },
 };
 
-interface InteractiveAvatarProps {
-  showConfig?: boolean;
-  onCloseConfig?: () => void;
-}
-
-function InteractiveAvatar({ showConfig = false, onCloseConfig }: InteractiveAvatarProps) {
+function InteractiveAvatar() {
   const { initAvatar, startAvatar, stopAvatar, sessionState, stream } =
     useStreamingAvatarSession();
   const { startVoiceChat } = useVoiceChat();
@@ -131,12 +126,10 @@ function InteractiveAvatar({ showConfig = false, onCloseConfig }: InteractiveAva
     <div className="w-full flex flex-col gap-4">
       <div className="flex flex-col rounded-xl bg-zinc-900 overflow-hidden">
         <div className="relative w-full aspect-video overflow-hidden flex flex-col items-center justify-center">
-          {showConfig ? (
-            <AvatarConfig config={config} onConfigChange={setConfig} onClose={onCloseConfig} />
-          ) : sessionState !== StreamingAvatarSessionState.INACTIVE ? (
+          {sessionState !== StreamingAvatarSessionState.INACTIVE ? (
             <AvatarVideo ref={mediaStream} />
           ) : (
-            <AvatarConfig config={config} onConfigChange={setConfig} onClose={onCloseConfig} />
+            <AvatarConfig config={config} onConfigChange={setConfig} />
           )}
         </div>
         <div className="flex flex-col gap-3 items-center justify-center p-4 border-t border-zinc-700 w-full">
@@ -144,16 +137,10 @@ function InteractiveAvatar({ showConfig = false, onCloseConfig }: InteractiveAva
             <AvatarControls />
           ) : sessionState === StreamingAvatarSessionState.INACTIVE ? (
             <div className="flex flex-row gap-4">
-              <Button 
-                onClick={() => startSessionV2(true)}
-                className="bg-[#7559FF] text-white text-sm px-6 py-2 rounded-lg disabled:opacity-50 h-fit"
-              >
+              <Button onClick={() => startSessionV2(true)}>
                 Start Voice Chat
               </Button>
-              <Button 
-                onClick={() => startSessionV2(false)}
-                className="bg-[#7559FF] text-white text-sm px-6 py-2 rounded-lg disabled:opacity-50 h-fit"
-              >
+              <Button onClick={() => startSessionV2(false)}>
                 Start Text Chat
               </Button>
             </div>
@@ -169,10 +156,10 @@ function InteractiveAvatar({ showConfig = false, onCloseConfig }: InteractiveAva
   );
 }
 
-export default function InteractiveAvatarWrapper({ showConfig, onCloseConfig }) {
+export default function InteractiveAvatarWrapper() {
   return (
     <StreamingAvatarProvider basePath={process.env.NEXT_PUBLIC_BASE_API_URL}>
-      <InteractiveAvatar showConfig={showConfig} onCloseConfig={onCloseConfig} />
+      <InteractiveAvatar />
     </StreamingAvatarProvider>
   );
 }
