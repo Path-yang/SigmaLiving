@@ -10,13 +10,18 @@ export async function POST() {
     const res = await fetch(`${baseApiUrl}/v1/streaming.create_token`, {
       method: "POST",
       headers: {
-        "x-api-key": HEYGEN_API_KEY,
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${HEYGEN_API_KEY}`,
       },
     });
 
     console.log("Response:", res);
 
     const data = await res.json();
+
+    if (!data.data || !data.data.token) {
+      throw new Error("No token received from HeyGen API");
+    }
 
     return new Response(data.data.token, {
       status: 200,
