@@ -129,9 +129,30 @@ function InteractiveAvatar({ showConfig = false, onConfigClose }: InteractiveAva
   return (
     <div className="w-full flex flex-col gap-4">
       <div className="flex flex-col rounded-xl bg-zinc-900 overflow-hidden w-full max-w-4xl">
-        {sessionState === StreamingAvatarSessionState.CONNECTED ? (            <AvatarVideo ref={mediaStream} />
+        {sessionState === StreamingAvatarSessionState.CONNECTED ? (
+            <AvatarVideo ref={mediaStream} />
+          ) : sessionState === StreamingAvatarSessionState.CONNECTING ? (
+            <div className="flex items-center justify-center h-64 text-white text-lg">
+              <div className="flex flex-col items-center gap-4">
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
+                <div>Connecting to avatar...</div>
+              </div>
+            </div>
+          ) : showConfig ? (
+            <div className="relative">
+              <AvatarConfig config={config} onConfigChange={setConfig} />
+              <Button 
+                onClick={onConfigClose}
+                className="absolute top-2 right-2 bg-gray-700 hover:bg-gray-600 text-white"
+                size="sm"
+              >
+                ✕
+              </Button>
+            </div>
           ) : (
-            <AvatarConfig config={config} onConfigChange={setConfig} />
+            <div className="flex items-center justify-center h-64 text-white text-lg">
+              Click "Avatar Settings" to configure your avatar
+            </div>
           )}
         </div>
         <div className="flex flex-col gap-3 items-center justify-center p-4 border-t border-zinc-700 w-full">
