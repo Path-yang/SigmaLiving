@@ -155,6 +155,8 @@ function InteractiveAvatar({ showConfig = false, onCloseConfig }: InteractiveAva
         <div className="flex flex-col gap-3 items-center justify-center p-4 border-t border-zinc-700 w-full">
           {sessionState === StreamingAvatarSessionState.CONNECTED ? (
             <AvatarControls />
+          ) : sessionState === StreamingAvatarSessionState.CONNECTING ? (
+            <LoadingIcon />
           ) : sessionState === StreamingAvatarSessionState.INACTIVE ? (
             <div className="flex flex-row gap-8">
               <Button onClick={async () => {
