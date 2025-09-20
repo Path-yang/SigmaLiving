@@ -23,19 +23,23 @@ import { MessageHistory } from "./AvatarSession/MessageHistory";
 import { AVATARS } from "@/app/lib/constants";
 
 const DEFAULT_CONFIG: StartAvatarRequest = {
-  quality: AvatarQuality.Low,
-  avatarName: AVATARS[0].avatar_id,
-  knowledgeId: undefined,
+  avatarId: "a-001",
   voice: {
+    voiceId: undefined,
     rate: 1.5,
     emotion: VoiceEmotion.EXCITED,
     model: ElevenLabsModel.eleven_flash_v2_5,
   },
-  language: "en",
-  voiceChatTransport: VoiceChatTransport.WEBSOCKET,
+  ttsSettings: {
+    stability: 0.75,
+    similarityBoost: 0.75,
+  },
   sttSettings: {
     provider: STTProvider.DEEPGRAM,
+    language: "en",
   },
+  quality: "low",
+  knowledgeId: undefined,
 };
 
 interface InteractiveAvatarProps {

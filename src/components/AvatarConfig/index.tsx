@@ -151,6 +151,19 @@ export const AvatarConfig: React.FC<AvatarConfigProps> = ({
               }
             />
           </Field>
+          <Field label="Voice Rate">
+            <Input
+              type="number"
+              placeholder="1.5"
+              min="0.1"
+              max="3.0"
+              step="0.1"
+              value={config.voice?.rate || 1.5}
+              onChange={(e) =>
+                onChange("voice", { ...config.voice, rate: parseFloat(e.target.value) || 1.5 })
+              }
+            />
+          </Field>
           <Field label="ElevenLabs Model">
             <Select
               isSelected={(option) => option === config.voice?.model}
@@ -159,6 +172,16 @@ export const AvatarConfig: React.FC<AvatarConfigProps> = ({
               value={config.voice?.model}
               onSelect={(option) =>
                 onChange("voice", { ...config.voice, model: option })
+              }
+            />
+          </Field>
+          <Field label="STT Language">
+            <Input
+              type="text"
+              placeholder="en"
+              value={config.sttSettings?.language || "en"}
+              onChange={(e) =>
+                onChange("sttSettings", { ...config.sttSettings, language: e.target.value || "en" })
               }
             />
           </Field>
