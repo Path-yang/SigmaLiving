@@ -7,13 +7,18 @@ import { Settings } from "lucide-react";
 
 export default function AssistantPage() {
   const [showConfig, setShowConfig] = useState(false);
+  console.log('AssistantPage showConfig:', showConfig);
 
   return (
     <div className="w-full h-screen flex flex-col bg-black relative">
       {/* Configuration Button - Top Right */}
       <div className="absolute top-4 right-4 z-50">
         <Button 
-          onClick={() => setShowConfig(!showConfig)}
+          onClick={() => {
+            console.log('Button clicked, current showConfig:', showConfig);
+            setShowConfig(!showConfig);
+            console.log('Button clicked, new showConfig will be:', !showConfig);
+          }}
           variant="outline"
           className="bg-gray-800 border-gray-600 text-white hover:bg-gray-700"
         >

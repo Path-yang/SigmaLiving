@@ -44,6 +44,7 @@ interface InteractiveAvatarProps {
 }
 
 function InteractiveAvatar({ showConfig = false, onCloseConfig }: InteractiveAvatarProps = {}) {
+  console.log('InteractiveAvatar showConfig:', showConfig);
   const { initAvatar, startAvatar, stopAvatar, sessionState, stream } =
     useStreamingAvatarSession();
   const { startVoiceChat } = useVoiceChat();
@@ -129,7 +130,7 @@ function InteractiveAvatar({ showConfig = false, onCloseConfig }: InteractiveAva
   return (
     <div className="w-full h-full flex flex-col">
       <div className="flex flex-col w-full h-full overflow-hidden">
-        {showConfig ? (
+        {console.log('Rendering showConfig:', showConfig), showConfig ? (
             <div className="relative">
               <AvatarConfig config={config} onConfigChange={setConfig} onClose={onCloseConfig} />
             </div>
