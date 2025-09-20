@@ -123,7 +123,9 @@ export async function POST(request: NextRequest) {
       code: sessionData.code,
       hasData: !!sessionData.data,
       hasToken: !!sessionData.data?.token,
-      hasSessionId: !!sessionData.data?.session_id
+      hasSessionId: !!sessionData.data?.session_id,
+      realtimeEndpoint: sessionData.data?.realtime_endpoint,
+      fullData: sessionData.data
     });
 
     if (sessionData.code !== 100) {
@@ -156,7 +158,7 @@ export async function POST(request: NextRequest) {
     const duration = Date.now() - startTime;
     console.log(`[${requestId}] Successfully created HeyGen session in ${duration}ms`);
 
-    return NextResponse.json({
+    const responseData = {
       token,
       session_id,
       realtime_endpoint,
@@ -165,7 +167,11 @@ export async function POST(request: NextRequest) {
       requestId,
       duration,
       timestamp: new Date().toISOString()
-    });
+    };
+    
+    console.log(`[${requestId}] Returning session data:`, responseData);
+    
+    return NextResponse.json(responseData);
 
   } catch (error) {
     const duration = Date.now() - startTime;

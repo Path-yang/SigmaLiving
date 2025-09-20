@@ -58,26 +58,48 @@ function InteractiveAvatar({ showConfig = false, onCloseConfig }: InteractiveAva
 
   const mediaStream = useRef<HTMLVideoElement>(null);
 
-  async function fetchAccessToken() {
+  async function createSession() {
     try {
-      const response = await fetch("/api/get-access-token", {
+      console.log("Creating HeyGen session with config:", config);
+      
+      const response = await fetch("/api/heygen/session", {
         method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          avatarId: config.avatarName,
+          quality: config.quality,
+        }),
       });
-      const token = await response.text();
 
-      console.log("Access Token:", token); // Log the token to verify
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error("Session creation failed:", errorData);
+        throw new Error(`Session creation failed: ${errorData.error || response.statusText}`);
+      }
 
-      return token;
+      const sessionData = await response.json();
+      console.log("Session created successfully:", sessionData);
+      
+      return sessionData;
     } catch (error) {
-      console.error("Error fetching access token:", error);
+      console.error("Error creating session:", error);
       throw error;
     }
   }
 
   const startSessionV2 = useMemoizedFn(async (isVoiceChat: boolean) => {
     try {
-      const newToken = await fetchAccessToken();
-      const avatar = initAvatar(newToken);
+      console.log("Starting avatar session...");
+      const sessionData = await createSession();
+      
+      if (!sessionData.token) {
+        throw new Error("No token received from session API");
+      }
+      
+      console.log("Initializing avatar with token:", sessionData.token);
+      const avatar = initAvatar(sessionData.token);
 
       avatar.on(StreamingEvents.AVATAR_START_TALKING, (e) => {
         console.log("Avatar started talking", e);
@@ -90,6 +112,7 @@ function InteractiveAvatar({ showConfig = false, onCloseConfig }: InteractiveAva
       });
       avatar.on(StreamingEvents.STREAM_READY, (event) => {
         console.log(">>>>> Stream ready:", event.detail);
+        console.log(">>>>> Avatar session connected successfully!");
       });
       avatar.on(StreamingEvents.USER_START, (event) => {
         console.log(">>>>> User started talking:", event);
@@ -109,7 +132,9 @@ function InteractiveAvatar({ showConfig = false, onCloseConfig }: InteractiveAva
         console.log(">>>>> Avatar end message:", event);
       });
 
+      console.log("Starting avatar with config:", config);
       await startAvatar(config);
+      console.log("Avatar start command sent, waiting for stream...");
 
       if (isVoiceChat) {
         await startVoiceChat();
