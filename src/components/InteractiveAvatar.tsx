@@ -55,6 +55,7 @@ function InteractiveAvatar({ showConfig = false, onCloseConfig }: InteractiveAva
   const { startVoiceChat } = useVoiceChat();
 
   const [config, setConfig] = useState<StartAvatarRequest>(DEFAULT_CONFIG);
+  const [isStarting, setIsStarting] = useState(false);
 
   const mediaStream = useRef<HTMLVideoElement>(null);
 
@@ -91,7 +92,7 @@ function InteractiveAvatar({ showConfig = false, onCloseConfig }: InteractiveAva
 
   const startSessionV2 = useMemoizedFn(async (isVoiceChat: boolean) => {
     try {
-      console.log("Starting avatar session...");
+      console.log("Starting avatar session...", { isVoiceChat, config });
       const sessionData = await createSession();
       
       if (!sessionData.token) {
@@ -113,6 +114,7 @@ function InteractiveAvatar({ showConfig = false, onCloseConfig }: InteractiveAva
       avatar.on(StreamingEvents.STREAM_READY, (event) => {
         console.log(">>>>> Stream ready:", event.detail);
         console.log(">>>>> Avatar session connected successfully!");
+        setIsStarting(false);
       });
       avatar.on(StreamingEvents.USER_START, (event) => {
         console.log(">>>>> User started talking:", event);
@@ -141,6 +143,10 @@ function InteractiveAvatar({ showConfig = false, onCloseConfig }: InteractiveAva
       }
     } catch (error) {
       console.error("Error starting avatar session:", error);
+      // Reset session state on error
+      setSessionState(StreamingAvatarSessionState.INACTIVE);
+      setIsStarting(false);
+      throw error; // Re-throw so button handlers can catch it
     }
   });
 
@@ -168,7 +174,7 @@ function InteractiveAvatar({ showConfig = false, onCloseConfig }: InteractiveAva
             </div>
           ) : sessionState === StreamingAvatarSessionState.CONNECTED ? (
             <AvatarVideo ref={mediaStream} />
-          ) : sessionState === StreamingAvatarSessionState.CONNECTING ? (
+          ) : sessionState === StreamingAvatarSessionState.CONNECTING || isStarting ? (
             <div className="flex items-center justify-center h-64 text-white text-lg">
               <div className="flex flex-col items-center gap-4">
                 <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
@@ -182,17 +188,37 @@ function InteractiveAvatar({ showConfig = false, onCloseConfig }: InteractiveAva
             <AvatarControls />
           ) : sessionState === StreamingAvatarSessionState.CONNECTING ? (
             <LoadingIcon />
-          ) : sessionState === StreamingAvatarSessionState.INACTIVE ? (
+          ) : sessionState === StreamingAvatarSessionState.INACTIVE && !isStarting ? (
             <div className="flex flex-row gap-8">
               <Button onClick={async () => {
-                onCloseConfig();
-                await startSessionV2(true);
+                try {
+                  console.log("Start Voice Chat button clicked");
+                  setIsStarting(true);
+                  onCloseConfig();
+                  console.log("Calling startSessionV2 with isVoiceChat=true");
+                  await startSessionV2(true);
+                  console.log("startSessionV2 completed successfully");
+                } catch (error) {
+                  console.error("Error in Start Voice Chat button:", error);
+                  setIsStarting(false);
+                  alert(`Error starting voice chat: ${error.message}`);
+                }
               }} className="px-12 py-4 text-xl">
                 Start Voice Chat
               </Button>
               <Button onClick={async () => {
-                onCloseConfig();
-                await startSessionV2(false);
+                try {
+                  console.log("Start Text Chat button clicked");
+                  setIsStarting(true);
+                  onCloseConfig();
+                  console.log("Calling startSessionV2 with isVoiceChat=false");
+                  await startSessionV2(false);
+                  console.log("startSessionV2 completed successfully");
+                } catch (error) {
+                  console.error("Error in Start Text Chat button:", error);
+                  setIsStarting(false);
+                  alert(`Error starting text chat: ${error.message}`);
+                }
               }} className="px-12 py-4 text-xl">
                 Start Text Chat
               </Button>
