@@ -30,7 +30,9 @@ import Link from "next/link"
 
 export default function CommunityClassesPage() {
     const [userName, setUserName] = useState("")
-    const [postalCode, setPostalCode] = useState("")
+    const [emergencyContactName, setEmergencyContactName] = useState("")
+    const [emergencyContactNumber, setEmergencyContactNumber] = useState("")
+    const [emergencyContactRelationship, setEmergencyContactRelationship] = useState("")
     const [selectedWorkshop, setSelectedWorkshop] = useState(null)
     const [isReservationOpen, setIsReservationOpen] = useState(false)
 
@@ -143,21 +145,6 @@ export default function CommunityClassesPage() {
         }
     ]
 
-    // Function to get nearest community centre based on postal code
-    const getNearestCommunityCentre = (postalCode) => {
-        // Simple mapping for demonstration - in real app, this would use a proper geocoding service
-        const postalCodeMap = {
-            "319194": "Toa Payoh Community Centre",
-            "569880": "Ang Mo Kio Community Centre",
-            "579799": "Bishan Community Centre",
-            "129880": "Clementi Community Centre",
-            "609577": "Jurong East Community Centre",
-            "528523": "Tampines Community Centre",
-            "738526": "Woodlands Community Centre"
-        }
-
-        return postalCodeMap[postalCode] || "Nearest Community Centre"
-    }
 
     const handleReserveSpot = (workshop) => {
         setSelectedWorkshop(workshop)
@@ -165,15 +152,17 @@ export default function CommunityClassesPage() {
     }
 
     const handleConfirmReservation = () => {
-        if (userName && postalCode) {
+        if (userName && emergencyContactName && emergencyContactNumber && emergencyContactRelationship) {
             // In a real app, this would make an API call to reserve the spot
-            alert(`Reservation confirmed for ${userName}!\n\nWorkshop: ${selectedWorkshop.title}\nDate: ${selectedWorkshop.date}\nTime: ${selectedWorkshop.time}\nLocation: ${selectedWorkshop.location}\n\nNearest Community Centre: ${getNearestCommunityCentre(postalCode)}`)
+            alert(`Reservation confirmed for ${userName}!\n\nWorkshop: ${selectedWorkshop.title}\nDate: ${selectedWorkshop.date}\nTime: ${selectedWorkshop.time}\nLocation: ${selectedWorkshop.location}\n\nEmergency Contact: ${emergencyContactName} (${emergencyContactRelationship})\nContact Number: ${emergencyContactNumber}`)
             setIsReservationOpen(false)
             setUserName("")
-            setPostalCode("")
+            setEmergencyContactName("")
+            setEmergencyContactNumber("")
+            setEmergencyContactRelationship("")
             setSelectedWorkshop(null)
         } else {
-            alert("Please fill in your name and postal code.")
+            alert("Please fill in all required fields including your name and emergency contact information.")
         }
     }
 
@@ -306,30 +295,60 @@ export default function CommunityClassesPage() {
                                         className="h-12 text-lg"
                                     />
                                 </div>
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                                        Postal Code *
-                                    </label>
-                                    <Input
-                                        type="text"
-                                        placeholder="Enter your postal code"
-                                        value={postalCode}
-                                        onChange={(e) => setPostalCode(e.target.value)}
-                                        className="h-12 text-lg"
-                                    />
-                                    <p className="text-sm text-gray-500 mt-1">
-                                        We'll recommend the nearest community centre to you
+
+                                <div className="border-t pt-4">
+                                    <h4 className="font-semibold text-gray-900 mb-3">Emergency Contact Information *</h4>
+                                    <div className="space-y-4">
+                                        <div>
+                                            <label className="block text-sm font-medium text-gray-700 mb-2">
+                                                Emergency Contact Name *
+                                            </label>
+                                            <Input
+                                                type="text"
+                                                placeholder="Enter emergency contact's full name"
+                                                value={emergencyContactName}
+                                                onChange={(e) => setEmergencyContactName(e.target.value)}
+                                                className="h-12 text-lg"
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="block text-sm font-medium text-gray-700 mb-2">
+                                                Contact Number *
+                                            </label>
+                                            <Input
+                                                type="tel"
+                                                placeholder="Enter contact number"
+                                                value={emergencyContactNumber}
+                                                onChange={(e) => setEmergencyContactNumber(e.target.value)}
+                                                className="h-12 text-lg"
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="block text-sm font-medium text-gray-700 mb-2">
+                                                Relationship *
+                                            </label>
+                                            <Input
+                                                type="text"
+                                                placeholder="e.g., Spouse, Child, Friend, Sibling"
+                                                value={emergencyContactRelationship}
+                                                onChange={(e) => setEmergencyContactRelationship(e.target.value)}
+                                                className="h-12 text-lg"
+                                            />
+                                        </div>
+                                    </div>
+                                    <p className="text-sm text-gray-500 mt-2">
+                                        This information will only be used in case of emergency during the workshop
                                     </p>
                                 </div>
                             </div>
 
-                            {userName && postalCode && (
+                            {userName && emergencyContactName && emergencyContactNumber && emergencyContactRelationship && (
                                 <div className="bg-green-50 p-4 rounded-lg">
                                     <div className="flex items-center mb-2">
                                         <CheckCircle className="w-5 h-5 text-green-600 mr-2" />
-                                        <span className="font-semibold text-green-800">Nearest Community Centre:</span>
+                                        <span className="font-semibold text-green-800">Ready to Reserve!</span>
                                     </div>
-                                    <p className="text-green-700">{getNearestCommunityCentre(postalCode)}</p>
+                                    <p className="text-green-700">All required information has been provided.</p>
                                 </div>
                             )}
 
