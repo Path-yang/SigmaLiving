@@ -136,8 +136,10 @@ function InteractiveAvatar({ showConfig = false, onCloseConfig }: InteractiveAva
     <div className="w-full h-full flex flex-col">
       <div className="flex flex-col w-full h-full overflow-hidden">
         {console.log('Rendering showConfig:', showConfig), showConfig ? (
-            <div className="relative">
-              <AvatarConfig config={config} onConfigChange={setConfig} onClose={onCloseConfig} />
+            <div className="flex items-center justify-center w-full h-full">
+              <div className="relative">
+                <AvatarConfig config={config} onConfigChange={setConfig} onClose={onCloseConfig} />
+              </div>
             </div>
           ) : sessionState === StreamingAvatarSessionState.CONNECTED ? (
             <AvatarVideo ref={mediaStream} />
@@ -155,10 +157,16 @@ function InteractiveAvatar({ showConfig = false, onCloseConfig }: InteractiveAva
             <AvatarControls />
           ) : sessionState === StreamingAvatarSessionState.INACTIVE ? (
             <div className="flex flex-row gap-8">
-              <Button onClick={() => startSessionV2(true)} className="px-12 py-4 text-xl">
+              <Button onClick={() => {
+                onCloseConfig();
+                startSessionV2(true);
+              }} className="px-12 py-4 text-xl">
                 Start Voice Chat
               </Button>
-              <Button onClick={() => startSessionV2(false)} className="px-12 py-4 text-xl">
+              <Button onClick={() => {
+                onCloseConfig();
+                startSessionV2(false);
+              }} className="px-12 py-4 text-xl">
                 Start Text Chat
               </Button>
             </div>
