@@ -12,7 +12,6 @@ import { Input } from "@/components/ui/input";
 import { Select } from "../Select";
 import { Field } from "./Field";
 import { useI18n } from '@/lib/i18n/context';
-import { ResponsiveText } from '@/components/responsive/ResponsiveText';
 
 import { AVATARS, STT_LANGUAGE_LIST } from "@/app/lib/constants";
 
@@ -185,9 +184,9 @@ export const AvatarConfig: React.FC<AvatarConfigProps> = ({
 
       {showMore && (
         <>
-          <ResponsiveText as="h1" size="lg" weight="bold" className="text-zinc-100 w-full text-center mt-4">
+          <h1 className="text-zinc-100 w-full text-center mt-4 text-lg font-bold">
             {t.assistant.avatarConfig.voiceSettings}
-          </ResponsiveText>
+          </h1>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Field label={t.assistant.avatarConfig.rate}>
               <Input
@@ -238,9 +237,9 @@ export const AvatarConfig: React.FC<AvatarConfigProps> = ({
               />
             </Field>
           </div>
-          <ResponsiveText as="h1" size="lg" weight="bold" className="text-zinc-100 w-full text-center mt-4">
+          <h1 className="text-zinc-100 w-full text-center mt-4 text-lg font-bold">
             {t.assistant.avatarConfig.sttSettings}
-          </ResponsiveText>
+          </h1>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Field label={t.assistant.avatarConfig.provider}>
               <Select

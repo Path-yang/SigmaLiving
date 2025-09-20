@@ -20,7 +20,6 @@ import { StreamingAvatarProvider, StreamingAvatarSessionState } from "./logic";
 import { LoadingIcon } from "./Icons";
 import { MessageHistory } from "./AvatarSession/MessageHistory";
 import { useI18n } from '@/lib/i18n/context';
-import { ResponsiveText } from '@/components/responsive/ResponsiveText';
 
 import { AVATARS } from "@/app/lib/constants";
 
@@ -146,14 +145,10 @@ function InteractiveAvatar() {
           ) : sessionState === StreamingAvatarSessionState.INACTIVE ? (
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
               <Button onClick={() => startSessionV2(true)}>
-                <ResponsiveText size="sm" weight="medium">
-                  {t.assistant.startVoiceChat}
-                </ResponsiveText>
+                {t.assistant.startVoiceChat}
               </Button>
               <Button onClick={() => startSessionV2(false)}>
-                <ResponsiveText size="sm" weight="medium">
-                  {t.assistant.startTextChat}
-                </ResponsiveText>
+                {t.assistant.startTextChat}
               </Button>
             </div>
           ) : (

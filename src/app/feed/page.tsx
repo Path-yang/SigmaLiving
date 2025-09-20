@@ -4,8 +4,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Heart, MessageCircle, Share, Plus } from 'lucide-react';
 import { useI18n } from '@/lib/i18n/context';
-import { ResponsiveText } from '@/components/responsive/ResponsiveText';
-import { ResponsiveContainer } from '@/components/responsive/ResponsiveContainer';
 
 export default function FeedPage() {
   const { t } = useI18n();
@@ -44,93 +42,89 @@ export default function FeedPage() {
     <div className="space-y-6 md:space-y-8">
       {/* Page Header */}
       <div className="text-center">
-        <ResponsiveText as="h1" size="3xl" weight="bold" className="text-gray-900 mb-4">
+        <h1 className="text-3xl font-bold text-gray-900 mb-4">
           {t.feed.title}
-        </ResponsiveText>
-        <ResponsiveText as="p" size="lg" className="text-gray-600 max-w-2xl mx-auto">
+        </h1>
+        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
           {t.feed.subtitle}
-        </ResponsiveText>
+        </p>
       </div>
 
       {/* Create Post Button */}
-      <ResponsiveContainer maxWidth="4xl">
-        <Card className="enhanced-card">
-          <CardContent className="p-4">
-            <Button className="w-full enhanced-button bg-blue-600 hover:bg-blue-700 text-white">
-              <Plus className="w-4 h-4 mr-2" />
-              <ResponsiveText size="sm" weight="medium">
-                {t.feed.post}
-              </ResponsiveText>
-            </Button>
-          </CardContent>
-        </Card>
-      </ResponsiveContainer>
+      <Card className="enhanced-card">
+        <CardContent className="p-4">
+          <Button className="w-full enhanced-button bg-blue-600 hover:bg-blue-700 text-white">
+            <Plus className="w-4 h-4 mr-2" />
+            <span className="text-sm font-medium">
+              {t.feed.post}
+            </span>
+          </Button>
+        </CardContent>
+      </Card>
 
       {/* Posts Feed */}
-      <ResponsiveContainer maxWidth="4xl">
-        <div className="space-y-4 md:space-y-6">
-          {samplePosts.map((post) => (
-            <Card key={post.id} className="enhanced-card">
-              <CardHeader className="pb-3">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-                      <span className="text-blue-600 font-semibold">
-                        {post.author.charAt(0)}
-                      </span>
-                    </div>
-                    <div>
-                      <ResponsiveText as="h3" size="base" weight="semibold" className="text-gray-900">
-                        {post.author}
-                      </ResponsiveText>
-                      <ResponsiveText as="p" size="sm" className="text-gray-500">
-                        {post.time}
-                      </ResponsiveText>
-                    </div>
+      <div className="space-y-4 md:space-y-6">
+        {samplePosts.map((post) => (
+          <Card key={post.id} className="enhanced-card">
+            <CardHeader className="pb-3">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                    <span className="text-blue-600 font-semibold">
+                      {post.author.charAt(0)}
+                    </span>
+                  </div>
+                  <div>
+                    <h3 className="text-base font-semibold text-gray-900">
+                      {post.author}
+                    </h3>
+                    <p className="text-sm text-gray-500">
+                      {post.time}
+                    </p>
                   </div>
                 </div>
-              </CardHeader>
+              </div>
+            </CardHeader>
+            
+            <CardContent className="pt-0">
+              <p className="text-base text-gray-700 mb-4">
+                {post.content}
+              </p>
               
-              <CardContent className="pt-0">
-                <ResponsiveText as="p" size="base" className="text-gray-700 mb-4">
-                  {post.content}
-                </ResponsiveText>
-                
-                {post.image && (
-                  <div className="mb-4 rounded-lg overflow-hidden bg-gray-100 h-48 flex items-center justify-center">
-                    <ResponsiveText size="sm" className="text-gray-500">
-                      Image placeholder
-                    </ResponsiveText>
-                  </div>
-                )}
-                
-                <div className="flex items-center gap-4">
-                  <Button variant="ghost" size="sm" className="flex items-center gap-2">
-                    <Heart className="w-4 h-4" />
-                    <ResponsiveText size="sm">
-                      {t.feed.like} ({post.likes})
-                    </ResponsiveText>
-                  </Button>
-                  
-                  <Button variant="ghost" size="sm" className="flex items-center gap-2">
-                    <MessageCircle className="w-4 h-4" />
-                    <ResponsiveText size="sm">
-                      {t.feed.comment} ({post.comments})
-                    </ResponsiveText>
-                  </Button>
-                  
-                  <Button variant="ghost" size="sm" className="flex items-center gap-2">
-                    <Share className="w-4 h-4" />
-                    <ResponsiveText size="sm">
-                      {t.feed.share}
-                    </ResponsiveText>
-                  </Button>
+              {post.image && (
+                <div className="mb-4 rounded-lg overflow-hidden bg-gray-100 h-48 flex items-center justify-center">
+                  <span className="text-sm text-gray-500">
+                    Image placeholder
+                  </span>
                 </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </ResponsiveContainer>
+              )}
+              
+              <div className="flex items-center gap-4">
+                <Button variant="ghost" size="sm" className="flex items-center gap-2">
+                  <Heart className="w-4 h-4" />
+                  <span className="text-sm">
+                    {t.feed.like} ({post.likes})
+                  </span>
+                </Button>
+                
+                <Button variant="ghost" size="sm" className="flex items-center gap-2">
+                  <MessageCircle className="w-4 h-4" />
+                  <span className="text-sm">
+                    {t.feed.comment} ({post.comments})
+                  </span>
+                </Button>
+                
+                <Button variant="ghost" size="sm" className="flex items-center gap-2">
+                  <Share className="w-4 h-4" />
+                  <span className="text-sm">
+                    {t.feed.share}
+                  </span>
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
     </div>
   );
 }

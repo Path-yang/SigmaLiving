@@ -4,8 +4,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Heart, BookOpen, Camera, Music, Utensils, Palette } from 'lucide-react';
 import { useI18n } from '@/lib/i18n/context';
-import { ResponsiveText } from '@/components/responsive/ResponsiveText';
-import { ResponsiveContainer } from '@/components/responsive/ResponsiveContainer';
 
 export default function HobbiesPage() {
   const { t } = useI18n();
@@ -59,44 +57,42 @@ export default function HobbiesPage() {
     <div className="space-y-6 md:space-y-8">
       {/* Page Header */}
       <div className="text-center">
-        <ResponsiveText as="h1" size="3xl" weight="bold" className="text-gray-900 mb-4">
+        <h1 className="text-3xl font-bold text-gray-900 mb-4">
           {t.hobbies.title}
-        </ResponsiveText>
-        <ResponsiveText as="p" size="lg" className="text-gray-600 max-w-2xl mx-auto">
+        </h1>
+        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
           {t.hobbies.subtitle}
-        </ResponsiveText>
+        </p>
       </div>
 
       {/* Categories */}
-      <ResponsiveContainer maxWidth="6xl">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-          {hobbyCategories.map((hobby, index) => {
-            const Icon = hobby.icon;
-            return (
-              <Card key={index} className="enhanced-card hover:shadow-lg transition-all duration-300">
-                <CardContent className="p-6">
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className={`w-12 h-12 ${hobby.bgColor} rounded-full flex items-center justify-center`}>
-                      <Icon className={`w-6 h-6 ${hobby.color}`} />
-                    </div>
-                    <ResponsiveText as="h3" size="lg" weight="semibold" className="text-gray-900">
-                      {hobby.title}
-                    </ResponsiveText>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+        {hobbyCategories.map((hobby, index) => {
+          const Icon = hobby.icon;
+          return (
+            <Card key={index} className="enhanced-card hover:shadow-lg transition-all duration-300">
+              <CardContent className="p-6">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className={`w-12 h-12 ${hobby.bgColor} rounded-full flex items-center justify-center`}>
+                    <Icon className={`w-6 h-6 ${hobby.color}`} />
                   </div>
-                  <ResponsiveText as="p" size="sm" className="text-gray-600 mb-4">
-                    {hobby.description}
-                  </ResponsiveText>
-                  <Button className="w-full enhanced-button">
-                    <ResponsiveText size="sm" weight="medium">
-                      Explore
-                    </ResponsiveText>
-                  </Button>
-                </CardContent>
-              </Card>
-            );
-          })}
-        </div>
-      </ResponsiveContainer>
+                  <h3 className="text-lg font-semibold text-gray-900">
+                    {hobby.title}
+                  </h3>
+                </div>
+                <p className="text-sm text-gray-600 mb-4">
+                  {hobby.description}
+                </p>
+                <Button className="w-full enhanced-button">
+                  <span className="text-sm font-medium">
+                    Explore
+                  </span>
+                </Button>
+              </CardContent>
+            </Card>
+          );
+        })}
+      </div>
     </div>
   );
 }
