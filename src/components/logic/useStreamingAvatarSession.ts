@@ -90,10 +90,7 @@ export const useStreamingAvatarSession = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({
-            avatarId: config.avatarName,
-            quality: config.quality,
-          }),
+          body: JSON.stringify(config),
         });
   
         if (!response.ok) {

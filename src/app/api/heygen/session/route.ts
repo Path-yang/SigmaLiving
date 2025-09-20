@@ -7,8 +7,8 @@ export async function POST(request: NextRequest) {
   console.log(`[${requestId}] Starting HeyGen session creation at ${new Date().toISOString()}`);
   
   try {
-    const { avatarId, quality = 'high' } = await request.json();
-    console.log(`[${requestId}] Request data:`, { avatarId, quality });
+    const { avatarName, quality = 'high' } = await request.json();
+    console.log(`[${requestId}] Request data:`, { avatarName, quality });
 
     const apiKey = process.env.HEYGEN_API_KEY;
     if (!apiKey) {
@@ -23,10 +23,10 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    let selectedAvatarId = avatarId || process.env.NEXT_PUBLIC_HEYGEN_AVATAR_ID || 'Thaddeus_ProfessionalLook2_public';
+    let selectedAvatarId = avatarName || process.env.NEXT_PUBLIC_HEYGEN_AVATAR_ID || 'Thaddeus_ProfessionalLook2_public';
 
     // If no avatar_id provided, fetch available avatars first
-    if (!avatarId && !process.env.NEXT_PUBLIC_HEYGEN_AVATAR_ID) {
+    if (!avatarName && !process.env.NEXT_PUBLIC_HEYGEN_AVATAR_ID) {
       console.log(`[${requestId}] No avatar_id provided, fetching available avatars...`);
       try {
         const avatarsResponse = await fetch('https://api.heygen.com/v1/streaming/avatar.list', {
@@ -64,11 +64,7 @@ export async function POST(request: NextRequest) {
           'X-Api-Key': apiKey,
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          avatar_id: selectedAvatarId,
-          quality: quality,
-          activity_idle_timeout: 120,
-        }),
+        body: JSON.stringify(await request.json()),
       }
     );
 
