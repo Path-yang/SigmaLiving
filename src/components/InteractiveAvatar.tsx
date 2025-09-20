@@ -43,8 +43,13 @@ interface InteractiveAvatarProps {
   onCloseConfig?: () => void;
 }
 
-function InteractiveAvatar({ showConfig = false, onCloseConfig }: InteractiveAvatarProps = {}) {
+function InteractiveAvatar({ showConfig = false, onCloseConfig }: InteractiveAvatarProps) {
   console.log('InteractiveAvatar showConfig:', showConfig);
+  
+  // Force re-render when showConfig changes
+  useEffect(() => {
+    console.log('InteractiveAvatar useEffect - showConfig changed to:', showConfig);
+  }, [showConfig]);
   const { initAvatar, startAvatar, stopAvatar, sessionState, stream } =
     useStreamingAvatarSession();
   const { startVoiceChat } = useVoiceChat();
