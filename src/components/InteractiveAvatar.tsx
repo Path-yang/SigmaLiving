@@ -38,7 +38,12 @@ const DEFAULT_CONFIG: StartAvatarRequest = {
   },
 };
 
-function InteractiveAvatar() {
+interface InteractiveAvatarProps {
+  showConfig?: boolean;
+  onConfigClose?: () => void;
+}
+
+function InteractiveAvatar({ showConfig = false, onConfigClose }: InteractiveAvatarProps = {}) {
   const { initAvatar, startAvatar, stopAvatar, sessionState, stream } =
     useStreamingAvatarSession();
   const { startVoiceChat } = useVoiceChat();
