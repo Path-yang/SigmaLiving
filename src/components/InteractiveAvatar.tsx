@@ -122,7 +122,7 @@ function InteractiveAvatar() {
   }, [mediaStream, stream]);
 
   return (
-    <div className="w-full flex flex-col gap-4">
+    <div className="w-full flex flex-col gap-4 items-center">
       <div className="flex flex-col rounded-xl bg-zinc-900 overflow-hidden">
         {sessionState === StreamingAvatarSessionState.CONNECTED ? (            <AvatarVideo ref={mediaStream} />
           ) : (
@@ -133,11 +133,11 @@ function InteractiveAvatar() {
           {sessionState === StreamingAvatarSessionState.CONNECTED ? (
             <AvatarControls />
           ) : sessionState === StreamingAvatarSessionState.INACTIVE ? (
-            <div className="flex flex-row gap-4">
-              <Button onClick={() => startSessionV2(true)}>
+            <div className="flex flex-row gap-6">
+              <Button onClick={() => startSessionV2(true)} className="px-8 py-3 text-lg">
                 Start Voice Chat
               </Button>
-              <Button onClick={() => startSessionV2(false)}>
+              <Button onClick={() => startSessionV2(false)} className="px-8 py-3 text-lg">
                 Start Text Chat
               </Button>
             </div>
