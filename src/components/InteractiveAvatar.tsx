@@ -19,7 +19,6 @@ import { useVoiceChat } from "./logic/useVoiceChat";
 import { StreamingAvatarProvider, StreamingAvatarSessionState } from "./logic";
 import { LoadingIcon } from "./Icons";
 import { MessageHistory } from "./AvatarSession/MessageHistory";
-import { useI18n } from '@/lib/i18n/context';
 
 import { AVATARS } from "@/app/lib/constants";
 
@@ -43,7 +42,6 @@ function InteractiveAvatar() {
   const { initAvatar, startAvatar, stopAvatar, sessionState, stream } =
     useStreamingAvatarSession();
   const { startVoiceChat } = useVoiceChat();
-  const { t } = useI18n();
 
   const [config, setConfig] = useState<StartAvatarRequest>(DEFAULT_CONFIG);
 
@@ -145,10 +143,10 @@ function InteractiveAvatar() {
           ) : sessionState === StreamingAvatarSessionState.INACTIVE ? (
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
               <Button onClick={() => startSessionV2(true)}>
-                {t.assistant.startVoiceChat}
+                Start Voice Chat
               </Button>
               <Button onClick={() => startSessionV2(false)}>
-                {t.assistant.startTextChat}
+                Start Text Chat
               </Button>
             </div>
           ) : (
