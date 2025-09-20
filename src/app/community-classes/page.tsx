@@ -39,11 +39,11 @@ import {
     faMugHot,
     faKeyboard
 } from '@fortawesome/free-solid-svg-icons'
-import { useState, useEffect } from "react"
+import { useState, useEffect, Suspense } from "react"
 import Link from "next/link"
 import { useSearchParams } from "next/navigation"
 
-export default function CommunityClassesPage() {
+function CommunityClassesContent() {
     const [userName, setUserName] = useState("")
     const [emergencyContactName, setEmergencyContactName] = useState("")
     const [emergencyContactNumber, setEmergencyContactNumber] = useState("")
@@ -836,5 +836,20 @@ export default function CommunityClassesPage() {
                 </Dialog>
             </main>
         </div>
+    )
+}
+
+export default function CommunityClassesPage() {
+    return (
+        <Suspense fallback={
+            <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+                <div className="text-center">
+                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600 mx-auto mb-4"></div>
+                    <p className="text-gray-600 text-lg">Loading community classes...</p>
+                </div>
+            </div>
+        }>
+            <CommunityClassesContent />
+        </Suspense>
     )
 }
