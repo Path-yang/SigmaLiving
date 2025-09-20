@@ -1,7 +1,7 @@
 import React from "react";
 
 import { useVoiceChat } from "../logic/useVoiceChat";
-import { Button } from "../Button";
+import { Button } from "@/components/ui/button";
 import { LoadingIcon, MicIcon, MicOffIcon } from "../Icons";
 import { useConversationState } from "../logic/useConversationState";
 

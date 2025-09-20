@@ -2,7 +2,7 @@ import { ToggleGroup, ToggleGroupItem } from "@radix-ui/react-toggle-group";
 import React from "react";
 
 import { useVoiceChat } from "../logic/useVoiceChat";
-import { Button } from "../Button";
+import { Button } from "@/components/ui/button";
 import { useInterrupt } from "../logic/useInterrupt";
 
 import { AudioInput } from "./AudioInput";

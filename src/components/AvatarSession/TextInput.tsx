@@ -3,10 +3,10 @@ import React, { useCallback, useEffect, useState } from "react";
 import { usePrevious } from "ahooks";
 
 import { Select } from "../Select";
-import { Button } from "../Button";
+import { Button } from "@/components/ui/button";
 import { SendIcon } from "../Icons";
 import { useTextChat } from "../logic/useTextChat";
-import { Input } from "../Input";
+import { Input } from "@/components/ui/input";
 import { useConversationState } from "../logic/useConversationState";
 
 export const TextInput: React.FC = () => {

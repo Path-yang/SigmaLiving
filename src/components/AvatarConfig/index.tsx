@@ -8,7 +8,7 @@ import {
   VoiceChatTransport,
 } from "@heygen/streaming-avatar";
 
-import { Input } from "../Input";
+import { Input } from "@/components/ui/input";
 import { Select } from "../Select";
 
 import { Field } from "./Field";
