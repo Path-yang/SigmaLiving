@@ -2,10 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { Mic } from "lucide-react";
-import Navigation from "@/components/Navigation";
 import { SilverSigmaLogo } from "@/components/SilverSigmaLogo";
+import Navigation from "@/components/Navigation";
 import { I18nProvider } from "@/lib/i18n/context";
 import { FontSizeProvider } from "@/lib/font-size/context";
 
@@ -46,11 +44,6 @@ export default function RootLayout({
                         SilverSigma
                       </h1>
                     </Link>
-                    {/* Placeholder for Text Size Toggle */}
-                    <Button variant="outline" size="sm" className="bg-gray-50/80 border-gray-200 text-gray-600 hover:bg-gray-100">
-                      <Mic className="w-4 h-4 mr-2" />
-                      Text Size
-                    </Button>
                   </div>
                 </div>
               </header>
