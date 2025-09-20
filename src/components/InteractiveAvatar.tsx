@@ -50,7 +50,7 @@ function InteractiveAvatar({ showConfig = false, onCloseConfig }: InteractiveAva
   useEffect(() => {
     console.log('InteractiveAvatar useEffect - showConfig changed to:', showConfig);
   }, [showConfig]);
-  const { initAvatar, startAvatar, stopAvatar, sessionState, stream } =
+  const { initAvatar, startAvatar, stopAvatar, sessionState, stream, setSessionState } =
     useStreamingAvatarSession();
   const { startVoiceChat } = useVoiceChat();
 
