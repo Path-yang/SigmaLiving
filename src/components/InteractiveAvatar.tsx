@@ -44,19 +44,11 @@ interface InteractiveAvatarProps {
 }
 
 function InteractiveAvatar({ showConfig = false, onCloseConfig }: InteractiveAvatarProps) {
-  console.log('InteractiveAvatar showConfig:', showConfig);
-  
-  // Force re-render when showConfig changes
-  useEffect(() => {
-    console.log('InteractiveAvatar useEffect - showConfig changed to:', showConfig);
-  }, [showConfig]);
-  
   const { initAvatar, startAvatar, stopAvatar, sessionState, stream } =
     useStreamingAvatarSession();
   const { startVoiceChat } = useVoiceChat();
 
   const [config, setConfig] = useState<StartAvatarRequest>(DEFAULT_CONFIG);
-  const [isStarting, setIsStarting] = useState(false);
 
   const mediaStream = useRef<HTMLVideoElement>(null);
 
@@ -78,12 +70,7 @@ function InteractiveAvatar({ showConfig = false, onCloseConfig }: InteractiveAva
 
   const startSessionV2 = useMemoizedFn(async (isVoiceChat: boolean) => {
     try {
-      console.log("Starting avatar session...", { isVoiceChat, config });
-      setIsStarting(true);
-      
       const newToken = await fetchAccessToken();
-      console.log("Token received, initializing avatar...");
-      
       const avatar = initAvatar(newToken);
 
       avatar.on(StreamingEvents.AVATAR_START_TALKING, (e) => {
@@ -117,20 +104,13 @@ function InteractiveAvatar({ showConfig = false, onCloseConfig }: InteractiveAva
         console.log(">>>>> Avatar end message:", event);
       });
 
-      console.log("Starting avatar with config:", config);
       await startAvatar(config);
 
       if (isVoiceChat) {
-        console.log("Starting voice chat...");
         await startVoiceChat();
       }
-      
-      console.log("Avatar session started successfully");
-      setIsStarting(false);
     } catch (error) {
       console.error("Error starting avatar session:", error);
-      setIsStarting(false);
-      throw error; // Re-throw so button handlers can catch it
     }
   });
 
@@ -148,58 +128,32 @@ function InteractiveAvatar({ showConfig = false, onCloseConfig }: InteractiveAva
   }, [mediaStream, stream]);
 
   return (
-    <div className="w-full h-full flex flex-col">
-      <div className="flex flex-col w-full h-full overflow-hidden">
-        {console.log('Rendering showConfig:', showConfig), showConfig ? (
-            <div className="flex items-center justify-center w-full h-full">
-              <div className="relative">
-                <AvatarConfig config={config} onConfigChange={setConfig} onClose={onCloseConfig} />
-              </div>
-            </div>
-          ) : sessionState === StreamingAvatarSessionState.CONNECTED ? (
+    <div className="w-full flex flex-col gap-4">
+      <div className="flex flex-col rounded-xl bg-zinc-900 overflow-hidden">
+        <div className="relative w-full aspect-video overflow-hidden flex flex-col items-center justify-center">
+          {showConfig ? (
+            <AvatarConfig config={config} onConfigChange={setConfig} onClose={onCloseConfig} />
+          ) : sessionState !== StreamingAvatarSessionState.INACTIVE ? (
             <AvatarVideo ref={mediaStream} />
-          ) : sessionState === StreamingAvatarSessionState.CONNECTING || isStarting ? (
-            <div className="flex items-center justify-center h-64 text-white text-lg">
-              <div className="flex flex-col items-center gap-4">
-                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
-                <div>Connecting to avatar...</div>
-              </div>
-            </div>
-          ) : null}
+          ) : (
+            <AvatarConfig config={config} onConfigChange={setConfig} onClose={onCloseConfig} />
+          )}
         </div>
         <div className="flex flex-col gap-3 items-center justify-center p-4 border-t border-zinc-700 w-full">
           {sessionState === StreamingAvatarSessionState.CONNECTED ? (
             <AvatarControls />
-          ) : sessionState === StreamingAvatarSessionState.CONNECTING ? (
-            <LoadingIcon />
-          ) : sessionState === StreamingAvatarSessionState.INACTIVE && !isStarting ? (
-            <div className="flex flex-row gap-8">
-              <Button onClick={async () => {
-                try {
-                  console.log("Start Voice Chat button clicked");
-                  onCloseConfig();
-                  console.log("Calling startSessionV2 with isVoiceChat=true");
-                  await startSessionV2(true);
-                  console.log("startSessionV2 completed successfully");
-                } catch (error) {
-                  console.error("Error in Start Voice Chat button:", error);
-                  alert(`Error starting voice chat: ${error.message}`);
-                }
-              }} className="px-12 py-4 text-xl">
+          ) : sessionState === StreamingAvatarSessionState.INACTIVE ? (
+            <div className="flex flex-row gap-4">
+              <Button 
+                onClick={() => startSessionV2(true)}
+                className="bg-[#7559FF] text-white text-sm px-6 py-2 rounded-lg disabled:opacity-50 h-fit"
+              >
                 Start Voice Chat
               </Button>
-              <Button onClick={async () => {
-                try {
-                  console.log("Start Text Chat button clicked");
-                  onCloseConfig();
-                  console.log("Calling startSessionV2 with isVoiceChat=false");
-                  await startSessionV2(false);
-                  console.log("startSessionV2 completed successfully");
-                } catch (error) {
-                  console.error("Error in Start Text Chat button:", error);
-                  alert(`Error starting text chat: ${error.message}`);
-                }
-              }} className="px-12 py-4 text-xl">
+              <Button 
+                onClick={() => startSessionV2(false)}
+                className="bg-[#7559FF] text-white text-sm px-6 py-2 rounded-lg disabled:opacity-50 h-fit"
+              >
                 Start Text Chat
               </Button>
             </div>
@@ -208,12 +162,16 @@ function InteractiveAvatar({ showConfig = false, onCloseConfig }: InteractiveAva
           )}
         </div>
       </div>
+      {sessionState === StreamingAvatarSessionState.CONNECTED && (
+        <MessageHistory />
+      )}
+    </div>
   );
 }
 
 export default function InteractiveAvatarWrapper({ showConfig, onCloseConfig }) {
   return (
-    <StreamingAvatarProvider>
+    <StreamingAvatarProvider basePath={process.env.NEXT_PUBLIC_BASE_API_URL}>
       <InteractiveAvatar showConfig={showConfig} onCloseConfig={onCloseConfig} />
     </StreamingAvatarProvider>
   );

@@ -27,10 +27,12 @@ export default function AssistantPage() {
         </Button>
       </div>
 
-      {/* Main Content */}
-      <div className="w-full h-full flex flex-col">
-        <div className="w-full h-full">
-          <InteractiveAvatar key={showConfig ? "config-true" : "config-false"} showConfig={showConfig} onCloseConfig={() => setShowConfig(false)} />
+      {/* Demo UI Layout - Exact Copy */}
+      <div className="w-screen h-screen flex flex-col">
+        <div className="w-[900px] flex flex-col items-start justify-start gap-5 mx-auto pt-4 pb-20">
+          <div className="w-full">
+            <InteractiveAvatar key={showConfig ? "config-true" : "config-false"} showConfig={showConfig} onCloseConfig={() => setShowConfig(false)} />
+          </div>
         </div>
       </div>
     </div>
