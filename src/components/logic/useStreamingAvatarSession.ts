@@ -33,7 +33,7 @@ export const useStreamingAvatarSession = () => {
 
   useMessageHistory();
 
-  const init = useCallback(
+  const initAvatar = useCallback(
     (token: string) => {
       avatarRef.current = new StreamingAvatar({
         token,
@@ -53,9 +53,9 @@ export const useStreamingAvatarSession = () => {
     [setSessionState, setStream],
   );
 
-  const stop = useCallback(async () => {
+  const stopAvatar = useCallback(async () => {
     avatarRef.current?.off(StreamingEvents.STREAM_READY, handleStream);
-    avatarRef.current?.off(StreamingEvents.STREAM_DISCONNECTED, stop);
+    avatarRef.current?.off(StreamingEvents.STREAM_DISCONNECTED, stopAvatar);
     clearMessages();
     stopVoiceChat();
     setIsListening(false);
@@ -76,46 +76,22 @@ export const useStreamingAvatarSession = () => {
     setIsAvatarTalking,
   ]);
 
-  const start = useCallback(
+  const startAvatar = useCallback(
     async (config: StartAvatarRequest) => {
       if (sessionState !== StreamingAvatarSessionState.INACTIVE) {
         throw new Error("There is already an active session");
       }
 
       try {
-        console.log("Creating HeyGen session with config:", config);
-        
-        const response = await fetch("/api/heygen/session", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(config),
-        });
-  
-        if (!response.ok) {
-          const errorData = await response.json();
-          console.error("Session creation failed:", errorData);
-          throw new Error(`Session creation failed: ${errorData.error || response.statusText}`);
-        }
-  
-        const sessionData = await response.json();
-        console.log("Session created successfully:", sessionData);
-        
-        if (!sessionData.token) {
-          throw new Error("No token received from session API");
-        }
-        
-        console.log("Initializing avatar with token:", sessionData.token);
-        const avatar = init(sessionData.token);
-  
-        if (!avatar) {
-          throw new Error("Avatar is not initialized");
-        }
-  
         setSessionState(StreamingAvatarSessionState.CONNECTING);
+        
+        if (!avatarRef.current) {
+          throw new Error("Avatar is not initialized. Call initAvatar first.");
+        }
+
+        const avatar = avatarRef.current;
         avatar.on(StreamingEvents.STREAM_READY, handleStream);
-        avatar.on(StreamingEvents.STREAM_DISCONNECTED, stop);
+        avatar.on(StreamingEvents.STREAM_DISCONNECTED, stopAvatar);
         avatar.on(
           StreamingEvents.CONNECTION_QUALITY_CHANGED,
           ({ detail }: { detail: ConnectionQuality }) =>
@@ -146,38 +122,34 @@ export const useStreamingAvatarSession = () => {
           StreamingEvents.AVATAR_END_MESSAGE,
           handleEndMessage,
         );
-  
+
         await avatar.createStartAvatar(config);
-  
-        return avatar;
       } catch (error) {
-        console.error("Error starting avatar session:", error);
+        console.error("Error starting avatar:", error);
         setSessionState(StreamingAvatarSessionState.INACTIVE);
         throw error;
       }
     },
     [
-      init,
-      handleStream,
-      stop,
+      sessionState,
       setSessionState,
       avatarRef,
-      sessionState,
+      handleStream,
+      stopAvatar,
       setConnectionQuality,
       setIsUserTalking,
+      setIsAvatarTalking,
       handleUserTalkingMessage,
       handleStreamingTalkingMessage,
       handleEndMessage,
-      setIsAvatarTalking,
     ],
   );
 
   return {
-    avatarRef,
+    initAvatar,
+    startAvatar,
+    stopAvatar,
     sessionState,
     stream,
-    initAvatar: init,
-    startAvatar: start,
-    stopAvatar: stop,
   };
 };
