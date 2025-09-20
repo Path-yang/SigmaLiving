@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Mic } from "lucide-react";
 import Navigation from "@/components/Navigation";
+import { SilverSigmaLogo } from "@/components/SilverSigmaLogo";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,17 +28,22 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} min-h-screen bg-gray-50 text-gray-900`}>
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
-          <header className="bg-white shadow-sm border-b">
+        <div className="min-h-screen">
+          <header className="bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-200/50">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="flex justify-between items-center py-6">
-                <Link href="/">
+                <Link href="/" className="flex items-center space-x-4">
+                  <SilverSigmaLogo 
+                    width={64}
+                    height={64}
+                    className="w-16 h-16"
+                  />
                   <h1 className="text-3xl font-bold text-gray-900 hover:text-blue-600 transition-colors">
                     SilverSigma
                   </h1>
                 </Link>
                 {/* Placeholder for Text Size Toggle */}
-                <Button variant="outline" size="sm" className="text-xs">
+                <Button variant="outline" size="sm" className="bg-gray-50/80 border-gray-200 text-gray-600 hover:bg-gray-100">
                   <Mic className="w-4 h-4 mr-2" />
                   Text Size
                 </Button>
@@ -49,7 +55,7 @@ export default function RootLayout({
             {children}
           </main>
           
-          <footer className="bg-white border-t mt-16">
+          <footer className="bg-white/95 backdrop-blur-md border-t border-gray-200/50 mt-16">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
               <div className="text-center text-gray-600">
                 <p>© 2024 SilverSigma. Designed with love for seniors in Singapore.</p>
@@ -58,7 +64,7 @@ export default function RootLayout({
           </footer>
           
           {/* Bottom Navigation - Mobile Only */}
-          <div className="fixed bottom-0 left-0 right-0 z-50 ">
+          <div className="fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-t border-gray-200/50 shadow-lg">
             <Navigation />
           </div>
         </div>
