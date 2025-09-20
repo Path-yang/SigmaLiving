@@ -123,14 +123,14 @@ function InteractiveAvatar() {
   }, [mediaStream, stream]);
 
   return (
-    <div className="w-full h-full flex flex-col">
-      {/* Main video area - much larger */}
-      <div className="flex-1 flex flex-col rounded-xl bg-zinc-900 overflow-hidden mb-4">
-        <div className="relative w-full h-full flex flex-col items-center justify-center">
+    <div className="w-full max-w-4xl mx-auto">
+      {/* Main video area - properly sized */}
+      <div className="flex flex-col rounded-xl bg-zinc-900 overflow-hidden mb-4">
+        <div className="relative w-full aspect-video flex flex-col items-center justify-center">
           {sessionState !== StreamingAvatarSessionState.INACTIVE ? (
             <AvatarVideo ref={mediaStream} />
           ) : (
-            <div className="w-full h-full flex items-center justify-center">
+            <div className="w-full h-full flex items-center justify-center p-6">
               <AvatarConfig config={config} onConfigChange={setConfig} />
             </div>
           )}

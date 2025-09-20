@@ -95,18 +95,18 @@ export const AvatarConfig: React.FC<AvatarConfigProps> = ({
   }, [config.avatarName]);
 
   return (
-    <div className="relative flex flex-col gap-6 w-full max-w-4xl mx-auto py-8 max-h-full overflow-y-auto px-6">
+    <div className="relative flex flex-col gap-4 w-full max-w-2xl mx-auto py-4 max-h-full overflow-y-auto px-4">
       {/* Close button if onClose is provided */}
       {onClose && (
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-zinc-400 hover:text-white text-2xl"
+          className="absolute top-2 right-2 text-zinc-400 hover:text-white text-2xl"
         >
           ×
         </button>
       )}
       
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <Field label="Custom Knowledge Base ID">
           <Input
             placeholder="Enter custom knowledge base ID"
@@ -183,10 +183,10 @@ export const AvatarConfig: React.FC<AvatarConfigProps> = ({
 
       {showMore && (
         <>
-          <h1 className="text-zinc-100 w-full text-center mt-5">
+          <h1 className="text-zinc-100 w-full text-center mt-4">
             Voice Settings
           </h1>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Field label="Rate">
               <Input
                 type="number"
@@ -236,10 +236,10 @@ export const AvatarConfig: React.FC<AvatarConfigProps> = ({
               />
             </Field>
           </div>
-          <h1 className="text-zinc-100 w-full text-center mt-5">
+          <h1 className="text-zinc-100 w-full text-center mt-4">
             STT Settings
           </h1>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Field label="Provider">
               <Select
                 isSelected={(option) => option === config.sttSettings?.provider}
