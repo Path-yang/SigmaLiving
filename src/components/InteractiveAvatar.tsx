@@ -127,8 +127,8 @@ function InteractiveAvatar({ showConfig = false, onCloseConfig }: InteractiveAva
   }, [mediaStream, stream]);
 
   return (
-    <div className="w-full flex flex-col gap-4">
-      <div className="flex flex-col rounded-xl bg-zinc-900 overflow-hidden w-full max-w-4xl">
+    <div className="w-full h-full flex flex-col">
+      <div className="flex flex-col w-full h-full overflow-hidden">
         {sessionState === StreamingAvatarSessionState.CONNECTED ? (
             <AvatarVideo ref={mediaStream} />
           ) : sessionState === StreamingAvatarSessionState.CONNECTING ? (

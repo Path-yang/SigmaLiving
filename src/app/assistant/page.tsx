@@ -23,8 +23,8 @@ export default function AssistantPage() {
       </div>
 
       {/* Main Content */}
-      <div className="w-full flex flex-col items-center justify-center gap-5 mx-auto h-full">
-        <div className="w-full">
+      <div className="w-full h-full flex flex-col">
+        <div className="w-full h-full">
           <InteractiveAvatar showConfig={showConfig} onCloseConfig={() => setShowConfig(false)} />
         </div>
       </div>
