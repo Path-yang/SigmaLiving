@@ -40,10 +40,10 @@ const DEFAULT_CONFIG: StartAvatarRequest = {
 
 interface InteractiveAvatarProps {
   showConfig?: boolean;
-  onConfigClose?: () => void;
+  onCloseConfig?: () => void;
 }
 
-function InteractiveAvatar({ showConfig = false, onConfigClose }: InteractiveAvatarProps = {}) {
+function InteractiveAvatar({ showConfig = false, onCloseConfig }: InteractiveAvatarProps = {}) {
   const { initAvatar, startAvatar, stopAvatar, sessionState, stream } =
     useStreamingAvatarSession();
   const { startVoiceChat } = useVoiceChat();
@@ -142,18 +142,14 @@ function InteractiveAvatar({ showConfig = false, onConfigClose }: InteractiveAva
             <div className="relative">
               <AvatarConfig config={config} onConfigChange={setConfig} />
               <Button 
-                onClick={onConfigClose}
+                onClick={onCloseConfig}
                 className="absolute top-2 right-2 bg-gray-700 hover:bg-gray-600 text-white"
                 size="sm"
               >
                 ✕
               </Button>
             </div>
-          ) : (
-            <div className="flex items-center justify-center h-64 text-white text-lg">
-              Click "Avatar Settings" to configure your avatar
-            </div>
-          )}
+          ) : null}
         </div>
         <div className="flex flex-col gap-3 items-center justify-center p-4 border-t border-zinc-700 w-full">
           {sessionState === StreamingAvatarSessionState.CONNECTED ? (
