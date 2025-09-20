@@ -70,7 +70,7 @@ export const AvatarConfig: React.FC<AvatarConfigProps> = ({
 
   const selectedAvatar = useMemo(() => {
     const avatar = AVATARS.find(
-      (avatar) => avatar.avatar_id === config.avatarName,
+      (avatar) => avatar.avatar_id === config.avatarId,
     );
 
     if (!avatar) {
@@ -86,15 +86,15 @@ export const AvatarConfig: React.FC<AvatarConfigProps> = ({
         avatarId: avatar.avatar_id,
       };
     }
-  }, [config.avatarName]);
+  }, [config.avatarId]);
 
   return (
     <div className="relative flex flex-col gap-4 w-[550px] py-8 max-h-full overflow-y-auto px-4">
       <Field label="Custom Knowledge Base ID">
         <Input
           placeholder="Enter custom knowledge base ID"
-          value={config.knowledgeId}
-          onChange={(e) => onChange("knowledgeId", e.target.value)}
+          value={config.knowledgeId || ""}
+          onChange={(e) => onChange("knowledgeId", e.target.value || undefined)}
         />
       </Field>
       <Field label="Avatar ID">
@@ -116,9 +116,9 @@ export const AvatarConfig: React.FC<AvatarConfigProps> = ({
           }
           onSelect={(option) => {
             if (typeof option === "string") {
-              onChange("avatarName", "");
+              onChange("avatarId", "");
             } else {
-              onChange("avatarName", option.avatar_id);
+              onChange("avatarId", option.avatar_id);
             }
           }}
         />
@@ -127,8 +127,8 @@ export const AvatarConfig: React.FC<AvatarConfigProps> = ({
         <Field label="Custom Avatar ID">
           <Input
             placeholder="Enter custom avatar ID"
-            value={config.avatarName}
-            onChange={(value) => onChange("avatarName", value)}
+            value={config.avatarId || ""}
+            onChange={(e) => onChange("avatarId", e.target.value)}
           />
         </Field>
       )}
@@ -170,9 +170,9 @@ export const AvatarConfig: React.FC<AvatarConfigProps> = ({
           <Field label="Custom Voice ID">
             <Input
               placeholder="Enter custom voice ID"
-              value={config.voice?.voiceId}
-              onChange={(value) =>
-                onChange("voice", { ...config.voice, voiceId: value })
+              value={config.voice?.voiceId || ""}
+              onChange={(e) =>
+                onChange("voice", { ...config.voice, voiceId: e.target.value || undefined })
               }
             />
           </Field>
