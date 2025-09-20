@@ -10,27 +10,28 @@ interface FeatureCardProps {
   desc: string
   href: string
   testId?: string
+  cardNumber?: 1 | 2 | 3 // Add card number for background styling
 }
 
-export function FeatureCard({ icon, title, desc, href, testId }: FeatureCardProps) {
+export function FeatureCard({ icon, title, desc, href, testId, cardNumber = 1 }: FeatureCardProps) {
+  const cardClass = `feature-card-${cardNumber} enhanced-card`;
+  
   return (
     <Link href={href} data-testid={testId}>
-      <Card className="p-6 hover:shadow-lg transition-all duration-200 cursor-pointer group h-full">
-        <div className="flex items-start space-x-4">
-          <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 group-hover:bg-blue-200 transition-colors">
-            <span className="text-2xl">{icon}</span>
-          </div>
-          <div className="flex-1 min-w-0">
-            <h3 className="text-xl font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
-              {title}
-            </h3>
-            <p className="text-gray-600 text-base leading-relaxed mb-4">
-              {desc}
-            </p>
-            <div className="flex items-center text-blue-600 font-medium group-hover:text-blue-700 transition-colors">
-              <span className="text-base">Learn more</span>
-              <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-            </div>
+      <Card className={`${cardClass} p-10 transition-all duration-300 cursor-pointer group h-full rounded-3xl shadow-lg`}>
+        <div className="relative z-10">
+          <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors">
+            {title}
+          </h3>
+          <p className="text-gray-700 text-lg leading-relaxed mb-8">
+            {desc}
+          </p>
+          <div className="flex items-center justify-center">
+            <button className="enhanced-button bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-semibold text-lg shadow-lg">
+              {title === 'Talk to AI' ? 'Start Chatting' : 
+               title === 'Share Moments' ? 'View Feed' : 
+               title === 'Learn Hobbies' ? 'Explore Hobbies' : 'Learn More'}
+            </button>
           </div>
         </div>
       </Card>
