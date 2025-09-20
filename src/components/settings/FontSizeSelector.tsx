@@ -1,21 +1,19 @@
 "use client";
 
-import React from 'react';
 import { useFontSize } from '@/lib/font-size/context';
 import { useI18n } from '@/lib/i18n/context';
-import { Button } from '@/components/ui/button';
 import { Settings } from 'lucide-react';
 
 export function FontSizeSelector() {
-  const { fontSize, setFontSize } = useFontSize();
+  const { fontSize, setFontSize, getFontSizeMultiplier } = useFontSize();
   const { t } = useI18n();
 
   const fontSizes = [
-    { key: 'small', label: 'Small', description: '14px' },
-    { key: 'medium', label: 'Medium', description: '16px' },
-    { key: 'large', label: 'Large', description: '18px' },
-    { key: 'extra-large', label: 'Extra Large', description: '20px' },
-  ] as const;
+    { key: 'small' as const, label: 'Small', size: '12px' },
+    { key: 'medium' as const, label: 'Medium', size: '14px' },
+    { key: 'large' as const, label: 'Large', size: '16px' },
+    { key: 'extra-large' as const, label: 'Extra Large', size: '18px' },
+  ];
 
   return (
     <div className="space-y-4">
@@ -26,19 +24,20 @@ export function FontSizeSelector() {
       
       <div className="grid grid-cols-2 gap-3">
         {fontSizes.map((size) => (
-          <Button
+          <button
             key={size.key}
-            variant={fontSize === size.key ? 'default' : 'outline'}
             onClick={() => setFontSize(size.key)}
-            className={`h-auto p-4 flex flex-col items-center gap-2 ${
+            className={`p-3 rounded-lg border-2 transition-all duration-200 ${
               fontSize === size.key
                 ? 'bg-blue-600 text-white border-blue-600'
-                : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
+                : 'bg-white text-gray-700 border-gray-200 hover:border-gray-300'
             }`}
           >
-            <span className="font-medium">{size.label}</span>
-            <span className="text-xs opacity-75">{size.description}</span>
-          </Button>
+            <div className="text-center">
+              <div className="font-medium">{size.label}</div>
+              <div className="text-sm opacity-75">{size.size}</div>
+            </div>
+          </button>
         ))}
       </div>
     </div>

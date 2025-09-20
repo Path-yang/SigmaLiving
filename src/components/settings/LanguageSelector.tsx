@@ -1,8 +1,6 @@
 "use client";
 
-import React from 'react';
 import { useI18n } from '@/lib/i18n/context';
-import { Button } from '@/components/ui/button';
 import { Globe } from 'lucide-react';
 
 export function LanguageSelector() {
@@ -17,19 +15,20 @@ export function LanguageSelector() {
       
       <div className="space-y-2">
         {availableLanguages.map((lang) => (
-          <Button
+          <button
             key={lang.code}
-            variant={language === lang.code ? 'default' : 'outline'}
             onClick={() => setLanguage(lang.code)}
-            className={`w-full justify-start h-auto p-4 ${
+            className={`w-full p-3 rounded-lg border-2 transition-all duration-200 text-left ${
               language === lang.code
                 ? 'bg-blue-600 text-white border-blue-600'
-                : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
+                : 'bg-white text-gray-700 border-gray-200 hover:border-gray-300'
             }`}
           >
-            <span className="text-xl mr-3">{lang.flag}</span>
-            <span className="font-medium">{lang.name}</span>
-          </Button>
+            <div className="flex items-center gap-3">
+              <span className="text-lg">{lang.flag}</span>
+              <span className="font-medium">{lang.name}</span>
+            </div>
+          </button>
         ))}
       </div>
     </div>

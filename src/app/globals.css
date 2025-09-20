@@ -298,3 +298,62 @@
     }
   }
 }
+
+/* Font Size Scaling - Applied globally without affecting functionality */
+@layer base {
+  /* Font size scaling variables */
+  :root {
+    --font-size-multiplier: 1;
+  }
+
+  /* Apply font size scaling to all text elements */
+  body {
+    font-size: calc(14px * var(--font-size-multiplier));
+  }
+
+  /* Scale all text elements proportionally */
+  h1, h2, h3, h4, h5, h6,
+  p, span, div, a, button, input, textarea, select,
+  .text-xs, .text-sm, .text-base, .text-lg, .text-xl, .text-2xl, .text-3xl, .text-4xl, .text-5xl, .text-6xl {
+    font-size: calc(1em * var(--font-size-multiplier)) !important;
+  }
+
+  /* Preserve functionality by not scaling these elements */
+  .no-scale {
+    font-size: unset !important;
+  }
+
+  /* Font size classes for different scales */
+  .font-size-small {
+    --font-size-multiplier: 0.75; /* 12px base */
+  }
+
+  .font-size-medium {
+    --font-size-multiplier: 0.875; /* 14px base */
+  }
+
+  .font-size-large {
+    --font-size-multiplier: 1; /* 16px base */
+  }
+
+  .font-size-extra-large {
+    --font-size-multiplier: 1.125; /* 18px base */
+  }
+}
+
+/* Apply font size class to body based on user preference */
+body.font-size-small {
+  --font-size-multiplier: 0.75;
+}
+
+body.font-size-medium {
+  --font-size-multiplier: 0.875;
+}
+
+body.font-size-large {
+  --font-size-multiplier: 1;
+}
+
+body.font-size-extra-large {
+  --font-size-multiplier: 1.125;
+}

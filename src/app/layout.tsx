@@ -6,6 +6,7 @@ import { SilverSigmaLogo } from "@/components/SilverSigmaLogo";
 import Navigation from "@/components/Navigation";
 import { I18nProvider } from "@/lib/i18n/context";
 import { FontSizeProvider } from "@/lib/font-size/context";
+import { FontSizeBody } from "@/components/FontSizeBody";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,41 +31,43 @@ export default function RootLayout({
       <body className={`${inter.className} min-h-screen bg-gray-50 text-gray-900`}>
         <I18nProvider>
           <FontSizeProvider>
-            <div className="min-h-screen">
-              <header className="bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-200/50">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                  <div className="flex justify-between items-center py-6">
-                    <Link href="/" className="flex items-center space-x-4">
-                      <SilverSigmaLogo 
-                        width={64}
-                        height={64}
-                        className="w-16 h-16"
-                      />
-                      <h1 className="text-3xl font-bold text-gray-900 hover:text-blue-600 transition-colors">
-                        SilverSigma
-                      </h1>
-                    </Link>
+            <FontSizeBody>
+              <div className="min-h-screen">
+                <header className="bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-200/50">
+                  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="flex justify-between items-center py-6">
+                      <Link href="/" className="flex items-center space-x-4">
+                        <SilverSigmaLogo 
+                          width={64}
+                          height={64}
+                          className="w-16 h-16"
+                        />
+                        <h1 className="text-3xl font-bold text-gray-900 hover:text-blue-600 transition-colors">
+                          SilverSigma
+                        </h1>
+                      </Link>
+                    </div>
                   </div>
-                </div>
-              </header>
-              
-              <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 pb-20">
-                {children}
-              </main>
-              
-              <footer className="bg-white/95 backdrop-blur-md border-t border-gray-200/50 mt-16">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                  <div className="text-center text-gray-600">
-                    <p>© 2024 SilverSigma. Designed with love for seniors in Singapore.</p>
+                </header>
+                
+                <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 pb-20">
+                  {children}
+                </main>
+                
+                <footer className="bg-white/95 backdrop-blur-md border-t border-gray-200/50 mt-16">
+                  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                    <div className="text-center text-gray-600">
+                      <p>© 2024 SilverSigma. Designed with love for seniors in Singapore.</p>
+                    </div>
                   </div>
+                </footer>
+                
+                {/* Bottom Navigation - Mobile Only */}
+                <div className="fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-t border-gray-200/50 shadow-lg">
+                  <Navigation />
                 </div>
-              </footer>
-              
-              {/* Bottom Navigation - Mobile Only */}
-              <div className="fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-t border-gray-200/50 shadow-lg">
-                <Navigation />
               </div>
-            </div>
+            </FontSizeBody>
           </FontSizeProvider>
         </I18nProvider>
       </body>

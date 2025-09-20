@@ -16,6 +16,7 @@ export const availableLanguages = [
   { code: 'en', name: 'English', flag: '🇺🇸' },
   { code: 'ms', name: 'Bahasa Melayu', flag: '🇲🇾' },
   { code: 'ta', name: 'தமிழ்', flag: '🇮🇳' },
+  { code: 'zh', name: '中文', flag: '🇨🇳' },
 ];
 
 export function I18nProvider({ children }: { children: React.ReactNode }) {
