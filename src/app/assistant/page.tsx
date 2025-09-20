@@ -5,9 +5,9 @@ import InteractiveAvatar from "@/components/InteractiveAvatar";
 export default function AssistantPage() {
   return (
     <div className="w-screen h-screen flex flex-col bg-black">
-      {/* Demo UI Layout - EXACT COPY */}
-      <div className="w-[900px] flex flex-col items-start justify-start gap-5 mx-auto pt-4 pb-20">
-        <div className="w-full">
+      {/* Full-width layout with larger video area */}
+      <div className="w-full h-full flex flex-col p-4">
+        <div className="w-full h-full max-w-6xl mx-auto">
           <InteractiveAvatar />
         </div>
       </div>
