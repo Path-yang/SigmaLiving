@@ -8,7 +8,7 @@ import {
   ElevenLabsModel,
 } from "@heygen/streaming-avatar";
 import { useEffect, useRef, useState } from "react";
-import { useUnmount } from "ahooks";
+import { useMemoizedFn, useUnmount } from "ahooks";
 
 import { Button } from "@/components/ui/button";
 import { AvatarConfig } from "./AvatarConfig";
@@ -50,7 +50,8 @@ function InteractiveAvatar({ showConfig = false, onCloseConfig }: InteractiveAva
   useEffect(() => {
     console.log('InteractiveAvatar useEffect - showConfig changed to:', showConfig);
   }, [showConfig]);
-  const { startAvatar, stopAvatar, sessionState, stream } =
+  
+  const { initAvatar, startAvatar, stopAvatar, sessionState, stream } =
     useStreamingAvatarSession();
   const { startVoiceChat } = useVoiceChat();
 
@@ -59,21 +60,79 @@ function InteractiveAvatar({ showConfig = false, onCloseConfig }: InteractiveAva
 
   const mediaStream = useRef<HTMLVideoElement>(null);
 
-  const startSession = async (isVoiceChat: boolean) => {
+  async function fetchAccessToken() {
+    try {
+      const response = await fetch("/api/get-access-token", {
+        method: "POST",
+      });
+      const token = await response.text();
+
+      console.log("Access Token:", token); // Log the token to verify
+
+      return token;
+    } catch (error) {
+      console.error("Error fetching access token:", error);
+      throw error;
+    }
+  }
+
+  const startSessionV2 = useMemoizedFn(async (isVoiceChat: boolean) => {
     try {
       console.log("Starting avatar session...", { isVoiceChat, config });
-      const avatar = await startAvatar(config);
-      console.log("Avatar start command sent, waiting for stream...");
+      setIsStarting(true);
+      
+      const newToken = await fetchAccessToken();
+      console.log("Token received, initializing avatar...");
+      
+      const avatar = initAvatar(newToken);
+
+      avatar.on(StreamingEvents.AVATAR_START_TALKING, (e) => {
+        console.log("Avatar started talking", e);
+      });
+      avatar.on(StreamingEvents.AVATAR_STOP_TALKING, (e) => {
+        console.log("Avatar stopped talking", e);
+      });
+      avatar.on(StreamingEvents.STREAM_DISCONNECTED, () => {
+        console.log("Stream disconnected");
+      });
+      avatar.on(StreamingEvents.STREAM_READY, (event) => {
+        console.log(">>>>> Stream ready:", event.detail);
+      });
+      avatar.on(StreamingEvents.USER_START, (event) => {
+        console.log(">>>>> User started talking:", event);
+      });
+      avatar.on(StreamingEvents.USER_STOP, (event) => {
+        console.log(">>>>> User stopped talking:", event);
+      });
+      avatar.on(StreamingEvents.USER_END_MESSAGE, (event) => {
+        console.log(">>>>> User end message:", event);
+      });
+      avatar.on(StreamingEvents.USER_TALKING_MESSAGE, (event) => {
+        console.log(">>>>> User talking message:", event);
+      });
+      avatar.on(StreamingEvents.AVATAR_TALKING_MESSAGE, (event) => {
+        console.log(">>>>> Avatar talking message:", event);
+      });
+      avatar.on(StreamingEvents.AVATAR_END_MESSAGE, (event) => {
+        console.log(">>>>> Avatar end message:", event);
+      });
+
+      console.log("Starting avatar with config:", config);
+      await startAvatar(config);
 
       if (isVoiceChat) {
+        console.log("Starting voice chat...");
         await startVoiceChat();
       }
+      
+      console.log("Avatar session started successfully");
+      setIsStarting(false);
     } catch (error) {
       console.error("Error starting avatar session:", error);
       setIsStarting(false);
       throw error; // Re-throw so button handlers can catch it
     }
-  };
+  });
 
   useUnmount(() => {
     stopAvatar();
@@ -118,14 +177,12 @@ function InteractiveAvatar({ showConfig = false, onCloseConfig }: InteractiveAva
               <Button onClick={async () => {
                 try {
                   console.log("Start Voice Chat button clicked");
-                  setIsStarting(true);
                   onCloseConfig();
-                  console.log("Calling startSession with isVoiceChat=true");
-                  await startSession(true);
-                  console.log("startSession completed successfully");
+                  console.log("Calling startSessionV2 with isVoiceChat=true");
+                  await startSessionV2(true);
+                  console.log("startSessionV2 completed successfully");
                 } catch (error) {
                   console.error("Error in Start Voice Chat button:", error);
-                  setIsStarting(false);
                   alert(`Error starting voice chat: ${error.message}`);
                 }
               }} className="px-12 py-4 text-xl">
@@ -134,14 +191,12 @@ function InteractiveAvatar({ showConfig = false, onCloseConfig }: InteractiveAva
               <Button onClick={async () => {
                 try {
                   console.log("Start Text Chat button clicked");
-                  setIsStarting(true);
                   onCloseConfig();
-                  console.log("Calling startSession with isVoiceChat=false");
-                  await startSession(false);
-                  console.log("startSession completed successfully");
+                  console.log("Calling startSessionV2 with isVoiceChat=false");
+                  await startSessionV2(false);
+                  console.log("startSessionV2 completed successfully");
                 } catch (error) {
                   console.error("Error in Start Text Chat button:", error);
-                  setIsStarting(false);
                   alert(`Error starting text chat: ${error.message}`);
                 }
               }} className="px-12 py-4 text-xl">
