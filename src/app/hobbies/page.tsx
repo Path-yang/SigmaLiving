@@ -583,7 +583,7 @@ export default function HobbiesPage() {
                           )}
                         </div>
                         <div className="text-center">
-                          <Link href="/community-classes">
+                          <Link href={`/community-classes?filter=${encodeURIComponent(selectedHobby?.name || '')}`}>
                             <Button
                               size="lg"
                               className="bg-green-600 hover:bg-green-700 text-white text-xl py-4 px-8 rounded-xl h-auto"
@@ -773,7 +773,7 @@ export default function HobbiesPage() {
                                   )}
                                 </div>
                                 <div className="text-center">
-                                  <Link href="/community-classes">
+                                  <Link href={`/community-classes?filter=${encodeURIComponent(hobby.name)}`}>
                                     <Button
                                       size="lg"
                                       className="bg-green-600 hover:bg-green-700 text-white text-xl py-4 px-8 rounded-xl h-auto"
@@ -884,57 +884,6 @@ export default function HobbiesPage() {
           </div>
         </section>
 
-        {/* Get Started Section */}
-        <section className="mb-16">
-          <Card className="shadow-lg bg-gradient-to-br from-green-50 to-blue-50">
-            <CardHeader className="text-center">
-              <CardTitle className="text-3xl font-bold text-gray-900 mb-4">Ready to Start?</CardTitle>
-              <CardDescription className="text-xl text-gray-600">
-                Join us and find your hobby!
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="text-center space-y-6">
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button
-                  size="lg"
-                  className="bg-green-600 hover:bg-green-700 text-white text-xl py-6 px-8 h-auto"
-                  onClick={() => {
-                    document.getElementById('community-finder')?.scrollIntoView({
-                      behavior: 'smooth'
-                    })
-                  }}
-                >
-                  <Users className="w-6 h-6 mr-2" />
-                  Join a Group
-                </Button>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="border-2 border-green-600 text-green-600 hover:bg-green-50 text-xl py-6 px-8 h-auto"
-                  onClick={() => window.open('tel:+15551234567')}
-                >
-                  <Phone className="w-6 h-6 mr-2" />
-                  Call Us: (555) 123-4567
-                </Button>
-              </div>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center text-lg text-gray-600">
-                <div className="flex items-center">
-                  <Mail className="w-5 h-5 mr-2" />
-                  <a
-                    href="mailto:info@hobbyhub.com"
-                    className="text-blue-600 hover:text-blue-800 underline"
-                  >
-                    info@hobbyhub.com
-                  </a>
-                </div>
-                <div className="flex items-center">
-                  <Clock className="w-5 h-5 mr-2" />
-                  <span>Monday - Friday, 9 AM - 5 PM</span>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </section>
       </main>
     </div>
   )

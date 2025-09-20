@@ -28,6 +28,17 @@ import {
 // Using only solid icons - will style differently for unliked/unbookmarked states
 import Image from 'next/image';
 import { useState } from 'react';
+import Link from 'next/link';
+
+// Hashtag component for clickable hashtags
+const Hashtag = ({ tag, children }: { tag: string; children: React.ReactNode }) => (
+  <Link
+    href={`/community-classes?filter=${encodeURIComponent(tag)}`}
+    className="text-blue-600 hover:text-blue-800 hover:underline font-medium"
+  >
+    {children}
+  </Link>
+);
 
 export default function FeedPage() {
   const [likedPosts, setLikedPosts] = useState<Set<number>>(new Set());
@@ -41,6 +52,7 @@ export default function FeedPage() {
       authorAvatar: '/images/margaret (1).jpg', // Margaret's profile picture
       time: '2 hours ago',
       content: 'Had a wonderful time at the community garden today! The tomatoes are growing beautifully. 🌱',
+      hashtags: ['Gardening'],
       image: '/images/community-garden.jpg',
       likes: 12,
       comments: 3,
@@ -55,6 +67,7 @@ export default function FeedPage() {
       authorAvatar: '/images/robert (1).jpg', // Robert's profile picture
       time: '5 hours ago',
       content: 'Just finished reading "The Art of Simple Living" - highly recommend it to everyone! 📚',
+      hashtags: ['Book Club'],
       image: null,
       likes: 8,
       comments: 5,
@@ -69,6 +82,7 @@ export default function FeedPage() {
       authorAvatar: '/images/sarah (1).jpg', // Sarah's profile picture
       time: '1 day ago',
       content: 'Our mahjong group had such a fun evening yesterday. Can\'t wait for next week! 🀄',
+      hashtags: ['Mahjong'],
       image: '/images/mahjong.jpeg',
       likes: 15,
       comments: 7,
@@ -212,7 +226,18 @@ export default function FeedPage() {
               </div>
 
               {/* Post Content */}
-              <p className="text-gray-800 mb-4 leading-relaxed">{post.content}</p>
+              <div className="mb-4">
+                <p className="text-gray-800 leading-relaxed">{post.content}</p>
+                {post.hashtags && post.hashtags.length > 0 && (
+                  <div className="flex flex-wrap gap-2 mt-3">
+                    {post.hashtags.map((hashtag, index) => (
+                      <Hashtag key={index} tag={hashtag}>
+                        #{hashtag}
+                      </Hashtag>
+                    ))}
+                  </div>
+                )}
+              </div>
 
               {/* Post Image */}
               {post.image && (
