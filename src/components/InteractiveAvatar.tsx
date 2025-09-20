@@ -157,15 +157,15 @@ function InteractiveAvatar({ showConfig = false, onCloseConfig }: InteractiveAva
             <AvatarControls />
           ) : sessionState === StreamingAvatarSessionState.INACTIVE ? (
             <div className="flex flex-row gap-8">
-              <Button onClick={() => {
+              <Button onClick={async () => {
                 onCloseConfig();
-                startSessionV2(true);
+                await startSessionV2(true);
               }} className="px-12 py-4 text-xl">
                 Start Voice Chat
               </Button>
-              <Button onClick={() => {
+              <Button onClick={async () => {
                 onCloseConfig();
-                startSessionV2(false);
+                await startSessionV2(false);
               }} className="px-12 py-4 text-xl">
                 Start Text Chat
               </Button>
