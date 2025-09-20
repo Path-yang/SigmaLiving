@@ -67,6 +67,7 @@ export async function POST(request: NextRequest) {
         body: JSON.stringify({
           avatar_id: selectedAvatarId,
           quality: quality,
+          activity_idle_timeout: 120,
         }),
       }
     );
