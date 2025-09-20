@@ -7,7 +7,8 @@ export async function POST(request: NextRequest) {
   console.log(`[${requestId}] Starting HeyGen session creation at ${new Date().toISOString()}`);
   
   try {
-    const { avatarName, quality = 'high' } = await request.json();
+    const body = await request.json();
+    const { avatarName, quality = 'high' } = body;
     console.log(`[${requestId}] Request data:`, { avatarName, quality });
 
     const apiKey = process.env.HEYGEN_API_KEY;
@@ -64,7 +65,7 @@ export async function POST(request: NextRequest) {
           'X-Api-Key': apiKey,
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(await request.json()),
+        body: JSON.stringify(body),
       }
     );
 
