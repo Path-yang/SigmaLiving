@@ -38,7 +38,7 @@ export default function FeedPage() {
     {
       id: 1,
       author: 'Margaret Chen',
-      authorAvatar: '/images/community-garden.jpg', // Using existing image as placeholder
+      authorAvatar: '/images/margaret (1).jpg', // Margaret's profile picture
       time: '2 hours ago',
       content: 'Had a wonderful time at the community garden today! The tomatoes are growing beautifully. 🌱',
       image: '/images/community-garden.jpg',
@@ -52,7 +52,7 @@ export default function FeedPage() {
     {
       id: 2,
       author: 'Robert Lim',
-      authorAvatar: null,
+      authorAvatar: '/images/robert (1).jpg', // Robert's profile picture
       time: '5 hours ago',
       content: 'Just finished reading "The Art of Simple Living" - highly recommend it to everyone! 📚',
       image: null,
@@ -66,7 +66,7 @@ export default function FeedPage() {
     {
       id: 3,
       author: 'Sarah Wong',
-      authorAvatar: '/images/mahjong.jpeg', // Using existing image as placeholder
+      authorAvatar: '/images/sarah (1).jpg', // Sarah's profile picture
       time: '1 day ago',
       content: 'Our mahjong group had such a fun evening yesterday. Can\'t wait for next week! 🀄',
       image: '/images/mahjong.jpeg',
