@@ -30,7 +30,7 @@ export default function AssistantPage() {
       {/* Main Content */}
       <div className="w-full h-full flex flex-col">
         <div className="w-full h-full">
-          <InteractiveAvatar showConfig={showConfig} onCloseConfig={() => setShowConfig(false)} />
+          <InteractiveAvatar key={showConfig ? "config-true" : "config-false"} showConfig={showConfig} onCloseConfig={() => setShowConfig(false)} />
         </div>
       </div>
     </div>
