@@ -58,7 +58,7 @@ export const AvatarConfig: React.FC<AvatarConfigProps> = ({
         <Input
           placeholder="Enter custom knowledge base ID"
           value={config.knowledgeId}
-          onChange={(value) => onChange("knowledgeId", value)}
+          onChange={(e) => onChange("knowledgeId", e.target.value)}
         />
       </Field>
       <Field label="Avatar ID">
