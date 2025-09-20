@@ -30,30 +30,30 @@ export function FontSizeProvider({ children }: { children: React.ReactNode }) {
   const getFontSizeClass = () => {
     switch (fontSize) {
       case 'small':
-        return 'text-xs'; // 12px
+        return 'text-size-small'; // 15.5px
       case 'medium':
-        return 'text-sm'; // 14px
+        return 'text-size-medium'; // 16px
       case 'large':
-        return 'text-base'; // 16px
+        return 'text-size-large'; // 16.5px
       case 'extra-large':
-        return 'text-lg'; // 18px
+        return 'text-size-extra-large'; // 17px
       default:
-        return 'text-sm';
+        return 'text-size-medium';
     }
   };
 
   const getFontSizeMultiplier = () => {
     switch (fontSize) {
       case 'small':
-        return 0.75; // 12px
+        return 0.96875; // 15.5px (15.5/16)
       case 'medium':
-        return 0.875; // 14px
+        return 1; // 16px (16/16)
       case 'large':
-        return 1; // 16px
+        return 1.03125; // 16.5px (16.5/16)
       case 'extra-large':
-        return 1.125; // 18px
+        return 1.0625; // 17px (17/16)
       default:
-        return 0.875;
+        return 1;
     }
   };
 

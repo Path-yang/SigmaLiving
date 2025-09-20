@@ -357,3 +357,42 @@ body.font-size-large {
 body.font-size-extra-large {
   --font-size-multiplier: 1.125;
 }
+
+/* Font Size Classes */
+.text-size-small {
+  font-size: 15.5px !important;
+}
+
+.text-size-medium {
+  font-size: 16px !important;
+}
+
+.text-size-large {
+  font-size: 16.5px !important;
+}
+
+.text-size-extra-large {
+  font-size: 17px !important;
+}
+
+/* Global font size application */
+body {
+  font-size: 16px; /* Default base size */
+}
+
+/* Apply font size scaling to all text elements */
+.text-size-small * {
+  font-size: 15.5px !important;
+}
+
+.text-size-medium * {
+  font-size: 16px !important;
+}
+
+.text-size-large * {
+  font-size: 16.5px !important;
+}
+
+.text-size-extra-large * {
+  font-size: 17px !important;
+}

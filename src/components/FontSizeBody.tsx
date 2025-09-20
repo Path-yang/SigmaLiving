@@ -4,15 +4,18 @@ import { useEffect } from 'react';
 import { useFontSize } from '@/lib/font-size/context';
 
 export function FontSizeBody({ children }: { children: React.ReactNode }) {
-  const { fontSize } = useFontSize();
+  const { getFontSizeClass } = useFontSize();
 
   useEffect(() => {
     // Remove existing font size classes
-    document.body.classList.remove('font-size-small', 'font-size-medium', 'font-size-large', 'font-size-extra-large');
+    document.body.className = document.body.className
+      .split(' ')
+      .filter(c => !c.startsWith('text-size-'))
+      .join(' ');
     
     // Add the current font size class
-    document.body.classList.add(`font-size-${fontSize}`);
-  }, [fontSize]);
+    document.body.classList.add(getFontSizeClass());
+  }, [getFontSizeClass]);
 
   return <>{children}</>;
 }
