@@ -1,4 +1,4 @@
-"use client";
+"use client"; // Auto-deploy trigger.
 
 import { Hero } from '@/components/Hero'
 import { FeatureCard } from '@/components/FeatureCard'
