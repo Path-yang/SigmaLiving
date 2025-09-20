@@ -70,7 +70,7 @@ export const AvatarConfig: React.FC<AvatarConfigProps> = ({
 
   const selectedAvatar = useMemo(() => {
     const avatar = AVATARS.find(
-      (avatar) => avatar.avatar_id === config.avatarId,
+      (avatar) => avatar.avatar_id === config.avatarName,
     );
 
     if (!avatar) {
@@ -86,7 +86,7 @@ export const AvatarConfig: React.FC<AvatarConfigProps> = ({
         avatarId: avatar.avatar_id,
       };
     }
-  }, [config.avatarId]);
+  }, [config.avatarName]);
 
   return (
     <div className="relative flex flex-col gap-4 w-[550px] py-8 max-h-full overflow-y-auto px-4">
@@ -116,9 +116,9 @@ export const AvatarConfig: React.FC<AvatarConfigProps> = ({
           }
           onSelect={(option) => {
             if (typeof option === "string") {
-              onChange("avatarId", "");
+              onChange("avatarName", "");
             } else {
-              onChange("avatarId", option.avatar_id);
+              onChange("avatarName", option.avatar_id);
             }
           }}
         />
@@ -127,8 +127,8 @@ export const AvatarConfig: React.FC<AvatarConfigProps> = ({
         <Field label="Custom Avatar ID">
           <Input
             placeholder="Enter custom avatar ID"
-            value={config.avatarId || ""}
-            onChange={(e) => onChange("avatarId", e.target.value)}
+            value={config.avatarName || ""}
+            onChange={(e) => onChange("avatarName", e.target.value)}
           />
         </Field>
       )}
