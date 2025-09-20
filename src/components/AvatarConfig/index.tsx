@@ -10,8 +10,9 @@ import {
 
 import { Input } from "@/components/ui/input";
 import { Select } from "../Select";
-
 import { Field } from "./Field";
+import { useI18n } from '@/lib/i18n/context';
+import { ResponsiveText } from '@/components/responsive/ResponsiveText';
 
 import { AVATARS, STT_LANGUAGE_LIST } from "@/app/lib/constants";
 
@@ -27,6 +28,7 @@ export const AvatarConfig: React.FC<AvatarConfigProps> = ({
   onClose,
 }) => {
   const [showMore, setShowMore] = useState(false);
+  const { t } = useI18n();
 
   const onChange = <T extends keyof StartAvatarRequest>(
     key: T,
@@ -107,14 +109,14 @@ export const AvatarConfig: React.FC<AvatarConfigProps> = ({
       )}
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <Field label="Custom Knowledge Base ID">
+        <Field label={t.assistant.avatarConfig.knowledgeBaseId}>
           <Input
             placeholder="Enter custom knowledge base ID"
             value={config.knowledgeId || ""}
             onChange={(e) => onChange("knowledgeId", e.target.value || undefined)}
           />
         </Field>
-        <Field label="Avatar ID">
+        <Field label={t.assistant.avatarConfig.avatarId}>
           <Select
             isSelected={(option) =>
               typeof option === "string"
@@ -141,7 +143,7 @@ export const AvatarConfig: React.FC<AvatarConfigProps> = ({
           />
         </Field>
         {selectedAvatar?.isCustom && (
-          <Field label="Custom Avatar ID">
+          <Field label={t.assistant.avatarConfig.avatarId}>
             <Input
               placeholder="Enter custom avatar ID"
               value={config.avatarName || ""}
@@ -149,7 +151,7 @@ export const AvatarConfig: React.FC<AvatarConfigProps> = ({
             />
           </Field>
         )}
-        <Field label="Language">
+        <Field label={t.assistant.avatarConfig.language}>
           <Select
             isSelected={(option) => option.value === config.language}
             options={STT_LANGUAGE_LIST}
@@ -161,7 +163,7 @@ export const AvatarConfig: React.FC<AvatarConfigProps> = ({
             onSelect={(option) => onChange("language", option.value)}
           />
         </Field>
-        <Field label="Avatar Quality">
+        <Field label={t.assistant.avatarConfig.quality}>
           <Select
             isSelected={(option) => option === config.quality}
             options={Object.values(AvatarQuality)}
@@ -170,7 +172,7 @@ export const AvatarConfig: React.FC<AvatarConfigProps> = ({
             onSelect={(option) => onChange("quality", option)}
           />
         </Field>
-        <Field label="Voice Chat Transport">
+        <Field label={t.assistant.avatarConfig.voiceChatTransport}>
           <Select
             isSelected={(option) => option === config.voiceChatTransport}
             options={Object.values(VoiceChatTransport)}
@@ -183,11 +185,11 @@ export const AvatarConfig: React.FC<AvatarConfigProps> = ({
 
       {showMore && (
         <>
-          <h1 className="text-zinc-100 w-full text-center mt-4">
-            Voice Settings
-          </h1>
+          <ResponsiveText as="h1" size="lg" weight="bold" className="text-zinc-100 w-full text-center mt-4">
+            {t.assistant.avatarConfig.voiceSettings}
+          </ResponsiveText>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <Field label="Rate">
+            <Field label={t.assistant.avatarConfig.rate}>
               <Input
                 type="number"
                 step="0.1"
@@ -203,7 +205,7 @@ export const AvatarConfig: React.FC<AvatarConfigProps> = ({
                 }
               />
             </Field>
-            <Field label="Emotion">
+            <Field label={t.assistant.avatarConfig.emotion}>
               <Select
                 isSelected={(option) => option === config.voice?.emotion}
                 options={Object.values(VoiceEmotion)}
@@ -214,7 +216,7 @@ export const AvatarConfig: React.FC<AvatarConfigProps> = ({
                 }
               />
             </Field>
-            <Field label="ElevenLabs Model">
+            <Field label={t.assistant.avatarConfig.model}>
               <Select
                 isSelected={(option) => option === config.voice?.model}
                 options={Object.values(ElevenLabsModel)}
@@ -225,7 +227,7 @@ export const AvatarConfig: React.FC<AvatarConfigProps> = ({
                 }
               />
             </Field>
-            <Field label="STT Language">
+            <Field label={t.assistant.avatarConfig.provider}>
               <Input
                 type="text"
                 placeholder="en"
@@ -236,11 +238,11 @@ export const AvatarConfig: React.FC<AvatarConfigProps> = ({
               />
             </Field>
           </div>
-          <h1 className="text-zinc-100 w-full text-center mt-4">
-            STT Settings
-          </h1>
+          <ResponsiveText as="h1" size="lg" weight="bold" className="text-zinc-100 w-full text-center mt-4">
+            {t.assistant.avatarConfig.sttSettings}
+          </ResponsiveText>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <Field label="Provider">
+            <Field label={t.assistant.avatarConfig.provider}>
               <Select
                 isSelected={(option) => option === config.sttSettings?.provider}
                 options={Object.values(STTProvider)}
@@ -261,7 +263,7 @@ export const AvatarConfig: React.FC<AvatarConfigProps> = ({
         className="text-zinc-400 text-sm cursor-pointer w-full text-center bg-transparent hover:text-white"
         onClick={() => setShowMore(!showMore)}
       >
-        {showMore ? "Show less" : "Show more..."}
+        {showMore ? t.assistant.avatarConfig.showLess : t.assistant.avatarConfig.showMore}
       </button>
     </div>
   );

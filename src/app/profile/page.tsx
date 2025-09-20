@@ -1,8 +1,17 @@
+"use client";
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { User, Settings, Heart, Camera, MessageSquare, Calendar } from 'lucide-react';
+import { useI18n } from '@/lib/i18n/context';
+import { ResponsiveText } from '@/components/responsive/ResponsiveText';
+import { ResponsiveContainer } from '@/components/responsive/ResponsiveContainer';
+import { FontSizeSelector } from '@/components/settings/FontSizeSelector';
+import { LanguageSelector } from '@/components/settings/LanguageSelector';
 
 export default function ProfilePage() {
+  const { t } = useI18n();
+  
   const userStats = {
     posts: 24,
     hobbies: 3,
@@ -18,71 +27,91 @@ export default function ProfilePage() {
   ];
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 md:space-y-8">
       {/* Page Header */}
       <div className="text-center">
-        <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-4">
-          My Profile
-        </h1>
-        <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-          Manage your account and see your activity on SilverSigma.
-        </p>
+        <ResponsiveText as="h1" size="3xl" weight="bold" className="text-gray-900 mb-4">
+          {t.profile.title}
+        </ResponsiveText>
+        <ResponsiveText as="p" size="lg" className="text-gray-600 max-w-2xl mx-auto">
+          {t.profile.subtitle}
+        </ResponsiveText>
       </div>
 
       {/* Profile Header */}
       <Card className="shadow-lg">
-        <CardContent className="p-8">
-          <div className="flex flex-col md:flex-row items-center gap-6">
-            <div className="w-24 h-24 bg-blue-100 rounded-full flex items-center justify-center">
-              <User className="w-12 h-12 text-blue-600" />
+        <CardContent className="p-6 md:p-8">
+          <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6">
+            <div className="w-20 h-20 md:w-24 md:h-24 bg-blue-100 rounded-full flex items-center justify-center">
+              <User className="w-10 h-10 md:w-12 md:h-12 text-blue-600" />
             </div>
             <div className="flex-1 text-center md:text-left">
-              <h2 className="text-3xl font-bold text-gray-900 mb-2">John Smith</h2>
-              <p className="text-lg text-gray-600 mb-4">Member since {userStats.joined}</p>
-              <p className="text-gray-700">
+              <ResponsiveText as="h2" size="2xl" weight="bold" className="text-gray-900 mb-2">
+                John Smith
+              </ResponsiveText>
+              <ResponsiveText as="p" size="base" className="text-gray-600 mb-4">
+                Member since {userStats.joined}
+              </ResponsiveText>
+              <ResponsiveText as="p" size="sm" className="text-gray-700">
                 I love gardening, reading, and spending time with my family. 
                 Always happy to meet new people and learn new things!
-              </p>
+              </ResponsiveText>
             </div>
             <Button className="bg-blue-600 hover:bg-blue-700 text-white">
-              <Settings className="w-5 h-5 mr-2" />
-              Edit Profile
+              <Settings className="w-4 h-4 md:w-5 md:h-5 mr-2" />
+              {t.profile.editProfile}
             </Button>
           </div>
         </CardContent>
       </Card>
 
       {/* Stats */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
         <Card className="text-center">
-          <CardContent className="p-6">
-            <Camera className="w-8 h-8 mx-auto mb-2 text-blue-600" />
-            <div className="text-2xl font-bold text-gray-900">{userStats.posts}</div>
-            <div className="text-sm text-gray-600">Posts</div>
+          <CardContent className="p-4 md:p-6">
+            <Camera className="w-6 h-6 md:w-8 md:h-8 mx-auto mb-2 text-blue-600" />
+            <ResponsiveText as="div" size="2xl" weight="bold" className="text-gray-900">
+              {userStats.posts}
+            </ResponsiveText>
+            <ResponsiveText as="div" size="sm" className="text-gray-600">
+              {t.profile.stats.posts}
+            </ResponsiveText>
           </CardContent>
         </Card>
         
         <Card className="text-center">
-          <CardContent className="p-6">
-            <Heart className="w-8 h-8 mx-auto mb-2 text-green-600" />
-            <div className="text-2xl font-bold text-gray-900">{userStats.hobbies}</div>
-            <div className="text-sm text-gray-600">Hobbies</div>
+          <CardContent className="p-4 md:p-6">
+            <Heart className="w-6 h-6 md:w-8 md:h-8 mx-auto mb-2 text-green-600" />
+            <ResponsiveText as="div" size="2xl" weight="bold" className="text-gray-900">
+              {userStats.hobbies}
+            </ResponsiveText>
+            <ResponsiveText as="div" size="sm" className="text-gray-600">
+              {t.profile.stats.hobbies}
+            </ResponsiveText>
           </CardContent>
         </Card>
         
         <Card className="text-center">
-          <CardContent className="p-6">
-            <User className="w-8 h-8 mx-auto mb-2 text-purple-600" />
-            <div className="text-2xl font-bold text-gray-900">{userStats.friends}</div>
-            <div className="text-sm text-gray-600">Friends</div>
+          <CardContent className="p-4 md:p-6">
+            <User className="w-6 h-6 md:w-8 md:h-8 mx-auto mb-2 text-purple-600" />
+            <ResponsiveText as="div" size="2xl" weight="bold" className="text-gray-900">
+              {userStats.friends}
+            </ResponsiveText>
+            <ResponsiveText as="div" size="sm" className="text-gray-600">
+              {t.profile.stats.friends}
+            </ResponsiveText>
           </CardContent>
         </Card>
         
         <Card className="text-center">
-          <CardContent className="p-6">
-            <Calendar className="w-8 h-8 mx-auto mb-2 text-orange-600" />
-            <div className="text-2xl font-bold text-gray-900">12</div>
-            <div className="text-sm text-gray-600">Events</div>
+          <CardContent className="p-4 md:p-6">
+            <Calendar className="w-6 h-6 md:w-8 md:h-8 mx-auto mb-2 text-orange-600" />
+            <ResponsiveText as="div" size="2xl" weight="bold" className="text-gray-900">
+              12
+            </ResponsiveText>
+            <ResponsiveText as="div" size="sm" className="text-gray-600">
+              {t.profile.stats.events}
+            </ResponsiveText>
           </CardContent>
         </Card>
       </div>
@@ -90,23 +119,29 @@ export default function ProfilePage() {
       {/* Recent Activity */}
       <Card className="shadow-lg">
         <CardHeader>
-          <CardTitle className="text-2xl font-bold text-gray-900">Recent Activity</CardTitle>
-          <CardDescription className="text-lg text-gray-600">
-            Your latest activities on SilverSigma
+          <CardTitle className="text-xl md:text-2xl font-bold text-gray-900">
+            {t.profile.recentActivity.title}
+          </CardTitle>
+          <CardDescription className="text-base md:text-lg text-gray-600">
+            {t.profile.recentActivity.description}
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="space-y-4">
+          <div className="space-y-3 md:space-y-4">
             {recentActivity.map((activity, index) => {
               const Icon = activity.icon;
               return (
-                <div key={index} className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg">
-                  <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-                    <Icon className="w-5 h-5 text-blue-600" />
+                <div key={index} className="flex items-center gap-3 md:gap-4 p-3 md:p-4 bg-gray-50 rounded-lg">
+                  <div className="w-8 h-8 md:w-10 md:h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                    <Icon className="w-4 h-4 md:w-5 md:h-5 text-blue-600" />
                   </div>
                   <div className="flex-1">
-                    <p className="text-lg font-medium text-gray-900">{activity.action}</p>
-                    <p className="text-sm text-gray-500">{activity.time}</p>
+                    <ResponsiveText as="p" size="base" weight="medium" className="text-gray-900">
+                      {activity.action}
+                    </ResponsiveText>
+                    <ResponsiveText as="p" size="sm" className="text-gray-500">
+                      {activity.time}
+                    </ResponsiveText>
                   </div>
                 </div>
               );
@@ -118,34 +153,45 @@ export default function ProfilePage() {
       {/* Settings */}
       <Card className="shadow-lg">
         <CardHeader>
-          <CardTitle className="text-2xl font-bold text-gray-900">Account Settings</CardTitle>
-          <CardDescription className="text-lg text-gray-600">
-            Manage your account preferences and privacy settings
+          <CardTitle className="text-xl md:text-2xl font-bold text-gray-900">
+            {t.profile.settings.title}
+          </CardTitle>
+          <CardDescription className="text-base md:text-lg text-gray-600">
+            {t.profile.settings.description}
           </CardDescription>
         </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
-            <div>
-              <h3 className="text-lg font-semibold text-gray-900">Notifications</h3>
-              <p className="text-gray-600">Get notified about new posts and activities</p>
-            </div>
-            <Button variant="outline">Manage</Button>
-          </div>
+        <CardContent className="space-y-6">
+          {/* Font Size Settings */}
+          <FontSizeSelector />
           
-          <div className="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
-            <div>
-              <h3 className="text-lg font-semibold text-gray-900">Privacy</h3>
-              <p className="text-gray-600">Control who can see your posts and profile</p>
-            </div>
-            <Button variant="outline">Manage</Button>
-          </div>
+          {/* Language Settings */}
+          <LanguageSelector />
           
-          <div className="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
-            <div>
-              <h3 className="text-lg font-semibold text-gray-900">Text Size</h3>
-              <p className="text-gray-600">Adjust text size for better readability</p>
+          {/* Other Settings */}
+          <div className="space-y-4">
+            <div className="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+              <div>
+                <ResponsiveText as="h3" size="base" weight="semibold" className="text-gray-900">
+                  {t.profile.settings.notifications}
+                </ResponsiveText>
+                <ResponsiveText as="p" size="sm" className="text-gray-600">
+                  Get notified about new posts and activities
+                </ResponsiveText>
+              </div>
+              <Button variant="outline">{t.profile.settings.manage}</Button>
             </div>
-            <Button variant="outline">Adjust</Button>
+            
+            <div className="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+              <div>
+                <ResponsiveText as="h3" size="base" weight="semibold" className="text-gray-900">
+                  {t.profile.settings.privacy}
+                </ResponsiveText>
+                <ResponsiveText as="p" size="sm" className="text-gray-600">
+                  Control who can see your posts and profile
+                </ResponsiveText>
+              </div>
+              <Button variant="outline">{t.profile.settings.manage}</Button>
+            </div>
           </div>
         </CardContent>
       </Card>

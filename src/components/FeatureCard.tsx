@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { Card } from '@/components/ui/card'
 import { ArrowRight } from '@/app/(marketing)/icons'
+import { ResponsiveText } from '@/components/responsive/ResponsiveText'
 
 interface FeatureCardProps {
   icon: string // Change from React.ComponentType to string
@@ -18,16 +19,27 @@ export function FeatureCard({ icon, title, desc, href, testId, cardNumber = 1 }:
   
   return (
     <Link href={href} data-testid={testId}>
-      <Card className={`${cardClass} p-10 transition-all duration-300 cursor-pointer group h-full rounded-3xl shadow-lg`}>
+      <Card className={`${cardClass} p-6 md:p-10 transition-all duration-300 cursor-pointer group h-full rounded-2xl md:rounded-3xl shadow-lg`}>
         <div className="relative z-10">
-          <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors">
+          <ResponsiveText 
+            as="h3" 
+            size="xl" 
+            weight="bold" 
+            className="text-gray-900 mb-3 md:mb-4 group-hover:text-blue-600 transition-colors"
+          >
             {title}
-          </h3>
-          <p className="text-gray-700 text-lg leading-relaxed mb-8">
+          </ResponsiveText>
+          
+          <ResponsiveText 
+            as="p" 
+            size="base" 
+            className="text-gray-700 leading-relaxed mb-6 md:mb-8"
+          >
             {desc}
-          </p>
+          </ResponsiveText>
+          
           <div className="flex items-center justify-center">
-            <button className="enhanced-button bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-semibold text-lg shadow-lg">
+            <button className="enhanced-button bg-blue-600 hover:bg-blue-700 text-white px-6 md:px-8 py-2 md:py-3 rounded-xl font-semibold text-sm md:text-lg shadow-lg">
               {title === 'Talk to AI' ? 'Start Chatting' : 
                title === 'Share Moments' ? 'View Feed' : 
                title === 'Learn Hobbies' ? 'Explore Hobbies' : 'Learn More'}
