@@ -170,10 +170,10 @@ function InteractiveAvatar({ showConfig = false, onCloseConfig }: InteractiveAva
   );
 }
 
-export default function InteractiveAvatarWrapper() {
+export default function InteractiveAvatarWrapper({ showConfig, onCloseConfig }) {
   return (
     <StreamingAvatarProvider>
-      <InteractiveAvatar />
+      <InteractiveAvatar showConfig={showConfig} onCloseConfig={onCloseConfig} />
     </StreamingAvatarProvider>
   );
 }
