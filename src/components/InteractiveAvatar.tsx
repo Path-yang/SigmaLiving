@@ -40,6 +40,7 @@ const DEFAULT_CONFIG: StartAvatarRequest = {
   },
   quality: "low",
   knowledgeId: undefined,
+  language: "en",
 };
 
 interface InteractiveAvatarProps {

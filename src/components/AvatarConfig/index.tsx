@@ -28,7 +28,43 @@ export const AvatarConfig: React.FC<AvatarConfigProps> = ({
     key: T,
     value: StartAvatarRequest[T],
   ) => {
-    onConfigChange({ ...config, [key]: value });
+    if (key === "language") {
+      // Sync language with STT settings
+      onConfigChange({
+        ...config,
+        [key]: value,
+        sttSettings: {
+          ...config.sttSettings,
+          language: value as string
+        }
+      });
+    } else if (key === "voice") {
+      onConfigChange({
+        ...config,
+        voice: {
+          ...config.voice,
+          ...(value as Partial<StartAvatarRequest['voice']>)
+        } as StartAvatarRequest['voice']
+      });
+    } else if (key === "ttsSettings") {
+      onConfigChange({
+        ...config,
+        ttsSettings: {
+          ...config.ttsSettings,
+          ...(value as Partial<StartAvatarRequest['ttsSettings']>)
+        } as StartAvatarRequest['ttsSettings']
+      });
+    } else if (key === "sttSettings") {
+      onConfigChange({
+        ...config,
+        sttSettings: {
+          ...config.sttSettings,
+          ...(value as Partial<StartAvatarRequest['sttSettings']>)
+        } as StartAvatarRequest['sttSettings']
+      });
+    } else {
+      onConfigChange({ ...config, [key]: value });
+    }
   };
   const [showMore, setShowMore] = useState<boolean>(false);
 
