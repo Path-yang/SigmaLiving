@@ -57,6 +57,7 @@ export async function POST(request: NextRequest) {
 
     // Call streaming.new with correct headers and body format
     console.log(`[${requestId}] Calling streaming.new with X-Api-Key header...`);
+    console.log(`[${requestId}] Sending body to HeyGen:`, body);
     const sessionResponse = await fetch(
       'https://api.heygen.com/v1/streaming.new',
       {
