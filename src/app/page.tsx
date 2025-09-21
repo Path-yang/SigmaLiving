@@ -10,19 +10,19 @@ export default function HomePage() {
   return (
     <div className="space-y-12 md:space-y-16">
       <Hero />
-      
+
       <section className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
         <FeatureCard
-          icon="🤖"
+          iconType="ai"
           title={t.home.features.ai.title}
           desc={t.home.features.ai.description}
           href="/assistant"
           testId="feature-ai"
           cardNumber={1}
         />
-        
+
         <FeatureCard
-          icon="❤️"
+          iconType="hobbies"
           title={t.home.features.hobbies.title}
           desc={t.home.features.hobbies.description}
           href="/hobbies"
@@ -31,7 +31,7 @@ export default function HomePage() {
         />
 
         <FeatureCard
-          icon="📱"
+          iconType="feed"
           title={t.home.features.feed.title}
           desc={t.home.features.feed.description}
           href="/feed"

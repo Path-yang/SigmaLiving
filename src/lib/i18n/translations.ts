@@ -17,8 +17,9 @@ export interface Translations {
     sort: string;
     refresh: string;
     retry: string;
+    learnMore: string;
   };
-  
+
   // Navigation
   navigation: {
     home: string;
@@ -27,14 +28,14 @@ export interface Translations {
     feed: string;
     profile: string;
   };
-  
+
   // Header
   header: {
     title: string;
     textSize: string;
     language: string;
   };
-  
+
   // Home Page
   home: {
     title: string;
@@ -43,18 +44,21 @@ export interface Translations {
       ai: {
         title: string;
         description: string;
+        actionButton: string;
       };
       hobbies: {
         title: string;
         description: string;
+        actionButton: string;
       };
       feed: {
         title: string;
         description: string;
+        actionButton: string;
       };
     };
   };
-  
+
   // Assistant Page
   assistant: {
     title: string;
@@ -78,7 +82,7 @@ export interface Translations {
       provider: string;
     };
   };
-  
+
   // Profile Page
   profile: {
     title: string;
@@ -105,7 +109,7 @@ export interface Translations {
       manage: string;
     };
   };
-  
+
   // Hobbies Page
   hobbies: {
     title: string;
@@ -114,7 +118,7 @@ export interface Translations {
     popular: string;
     new: string;
   };
-  
+
   // Feed Page
   feed: {
     title: string;
@@ -124,7 +128,7 @@ export interface Translations {
     comment: string;
     share: string;
   };
-  
+
   // Footer
   footer: {
     copyright: string;
@@ -150,6 +154,7 @@ export const translations: Record<string, Translations> = {
       sort: "Sort",
       refresh: "Refresh",
       retry: "Retry",
+      learnMore: "Learn More",
     },
     navigation: {
       home: "Home",
@@ -170,14 +175,17 @@ export const translations: Record<string, Translations> = {
         ai: {
           title: "Talk to AI",
           description: "Have meaningful conversations with our friendly AI companion using voice or text. Get help, advice, or just chat whenever you need someone to talk to.",
+          actionButton: "Start Chatting",
         },
         hobbies: {
           title: "Learn Hobbies",
           description: "Discover new hobbies and activities to keep you engaged and active. From gardening tips to cooking recipes, explore what interests you most.",
+          actionButton: "Explore Hobbies",
         },
         feed: {
           title: "Share Moments",
           description: "Share photos and updates with your family and friends easily. Stay connected with your loved ones and never miss important moments.",
+          actionButton: "View Feed",
         },
       },
     },
@@ -247,7 +255,7 @@ export const translations: Record<string, Translations> = {
       copyright: "© 2024 SilverSigma. Designed with love for seniors in Singapore.",
     },
   },
-  
+
   ms: {
     common: {
       loading: "Memuat...",
@@ -266,6 +274,7 @@ export const translations: Record<string, Translations> = {
       sort: "Susun",
       refresh: "Muat semula",
       retry: "Cuba lagi",
+      learnMore: "Ketahui Lebih Lanjut",
     },
     navigation: {
       home: "Utama",
@@ -286,14 +295,17 @@ export const translations: Record<string, Translations> = {
         ai: {
           title: "Bercakap dengan AI",
           description: "Berbual bermakna dengan pembantu AI mesra kami menggunakan suara atau teks. Dapatkan bantuan, nasihat, atau hanya berbual bila-bila masa anda perlukan seseorang untuk bercakap.",
+          actionButton: "Mula Sembang",
         },
         hobbies: {
           title: "Belajar Hobi",
           description: "Temui hobi dan aktiviti baru untuk kekal terlibat dan aktif. Dari petua berkebun hingga resipi memasak, terokai apa yang menarik minat anda.",
+          actionButton: "Terokai Hobi",
         },
         feed: {
           title: "Kongsi Detik",
           description: "Kongsi foto dan kemas kini dengan keluarga dan rakan-rakan anda dengan mudah. Terus berhubung dengan orang tersayang dan jangan terlepas detik-detik penting.",
+          actionButton: "Lihat Suapan",
         },
       },
     },
@@ -363,7 +375,7 @@ export const translations: Record<string, Translations> = {
       copyright: "© 2024 SilverSigma. Direka dengan kasih sayang untuk warga emas di Singapura.",
     },
   },
-  
+
   ta: {
     common: {
       loading: "ஏற்றுகிறது...",
@@ -382,6 +394,7 @@ export const translations: Record<string, Translations> = {
       sort: "வரிசைப்படுத்து",
       refresh: "புதுப்பி",
       retry: "மீண்டும் முயற்சி",
+      learnMore: "மேலும் அறிய",
     },
     navigation: {
       home: "முகப்பு",
@@ -402,14 +415,17 @@ export const translations: Record<string, Translations> = {
         ai: {
           title: "AI-உடன் பேசுங்கள்",
           description: "குரல் அல்லது உரையைப் பயன்படுத்தி எங்கள் நட்பு AI உதவியாளருடன் அர்த்தமுள்ள உரையாடல்களைக் கொள்ளுங்கள். உதவி, ஆலோசனை, அல்லது பேச ஒருவர் தேவைப்படும்போது பேசுங்கள்.",
+          actionButton: "உரையாடலைத் தொடங்குங்கள்",
         },
         hobbies: {
           title: "விருப்பங்களைக் கற்குங்கள்",
           description: "உங்களை ஈடுபடுத்தவும் செயலில் வைக்கவும் புதிய விருப்பங்கள் மற்றும் செயல்பாடுகளைக் கண்டறியுங்கள். தோட்டக்கலை குறிப்புகள் முதல் சமையல் செய்முறைகள் வரை, உங்களை ஆர்வமூட்டும் விஷயங்களை ஆராயுங்கள்.",
+          actionButton: "விருப்பங்களை ஆராயுங்கள்",
         },
         feed: {
           title: "தருணங்களைப் பகிர்ந்துகொள்ளுங்கள்",
           description: "உங்கள் குடும்பம் மற்றும் நண்பர்களுடன் புகைப்படங்கள் மற்றும் புதுப்பிப்புகளை எளிதாகப் பகிர்ந்துகொள்ளுங்கள். உங்கள் அன்புக்குரியவர்களுடன் இணைந்திருங்கள் மற்றும் முக்கியமான தருணங்களைத் தவறவிடாதீர்கள்.",
+          actionButton: "உணவைப் பார்க்கவும்",
         },
       },
     },
@@ -479,7 +495,7 @@ export const translations: Record<string, Translations> = {
       copyright: "© 2024 SilverSigma. சிங்கப்பூரில் மூத்தவர்களுக்காக அன்புடன் வடிவமைக்கப்பட்டது.",
     },
   },
-  
+
   zh: {
     common: {
       loading: "加载中...",
@@ -498,6 +514,7 @@ export const translations: Record<string, Translations> = {
       sort: "排序",
       refresh: "刷新",
       retry: "重试",
+      learnMore: "了解更多",
     },
     navigation: {
       home: "首页",
@@ -518,14 +535,17 @@ export const translations: Record<string, Translations> = {
         ai: {
           title: "与AI对话",
           description: "使用语音或文字与我们友好的AI伙伴进行有意义的对话。获得帮助、建议，或随时与需要的人聊天。",
+          actionButton: "开始聊天",
         },
         hobbies: {
           title: "学习爱好",
           description: "发现新的爱好和活动，让您保持参与和活跃。从园艺技巧到烹饪食谱，探索最感兴趣的内容。",
+          actionButton: "探索爱好",
         },
         feed: {
           title: "分享时刻",
           description: "轻松与家人朋友分享照片和更新。与您所爱的人保持联系，不错过重要时刻。",
+          actionButton: "查看动态",
         },
       },
     },
