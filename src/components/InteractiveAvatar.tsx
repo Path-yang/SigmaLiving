@@ -123,10 +123,10 @@ function InteractiveAvatar() {
   }, [mediaStream, stream]);
 
   return (
-    <div className="w-full max-w-4xl mx-auto">
-      {/* Main video area - properly sized */}
-      <div className="flex flex-col rounded-xl bg-zinc-900 overflow-hidden mb-4">
-        <div className="relative w-full aspect-video flex flex-col items-center justify-center">
+    <div className="w-full h-screen flex flex-col">
+      {/* Main video area - occupying almost entire screen */}
+      <div className="flex flex-col bg-zinc-900 overflow-hidden flex-1">
+        <div className="relative w-full h-full flex flex-col items-center justify-center">
           {sessionState !== StreamingAvatarSessionState.INACTIVE ? (
             <AvatarVideo ref={mediaStream} />
           ) : (
@@ -155,9 +155,9 @@ function InteractiveAvatar() {
         </div>
       </div>
       
-      {/* Message history below video */}
+      {/* Message history below video - only when connected */}
       {sessionState === StreamingAvatarSessionState.CONNECTED && (
-        <div className="h-48">
+        <div className="h-32 bg-zinc-800">
           <MessageHistory />
         </div>
       )}
