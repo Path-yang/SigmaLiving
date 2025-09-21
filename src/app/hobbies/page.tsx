@@ -474,43 +474,16 @@ export default function HobbiesPage() {
 
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-blue-50 to-green-50 py-16 px-4">
-        <div className="max-w-6xl mx-auto text-center">
-          <div className="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-            <HeartHandshake className="w-12 h-12 text-green-600" />
+        <div className="max-w-6xl mx-auto">
+          <div className="flex items-center justify-center relative">
+            <div className="absolute left-16 w-24 h-24 bg-green-100 rounded-full flex items-center justify-center">
+              <HeartHandshake className="w-12 h-12 text-green-600" />
+            </div>
+            <h1 className="text-7xl md:text-8xl lg:text-9xl font-bold text-gray-900 leading-tight text-center">
+              Find Your Hobby,<br />
+              <span className="text-green-600">Make Friends</span>
+            </h1>
           </div>
-          <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-            Find Your Hobby,<br />
-            <span className="text-green-600">Make Friends</span>
-          </h1>
-          <p className="text-2xl md:text-3xl text-gray-700 mb-8 leading-relaxed max-w-4xl mx-auto">
-            Fun activities + Great people = Happy you!
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
-            <div className="flex items-center text-lg text-gray-600">
-              <CheckCircle className="w-6 h-6 text-green-600 mr-2" />
-              Free & Easy
-            </div>
-            <div className="flex items-center text-lg text-gray-600">
-              <CheckCircle className="w-6 h-6 text-green-600 mr-2" />
-              All Levels Welcome
-            </div>
-            <div className="flex items-center text-lg text-gray-600">
-              <CheckCircle className="w-6 h-6 text-green-600 mr-2" />
-              Local Groups
-            </div>
-          </div>
-          <Button
-            size="lg"
-            className="bg-green-600 hover:bg-green-700 text-white text-2xl py-6 px-12 rounded-xl h-auto"
-            onClick={() => {
-              document.getElementById('hobby-categories')?.scrollIntoView({
-                behavior: 'smooth'
-              })
-            }}
-          >
-            Let's Go!
-            <ArrowRight className="w-6 h-6 ml-2" />
-          </Button>
         </div>
       </section>
 
@@ -533,13 +506,12 @@ export default function HobbiesPage() {
                   </p>
                   <Dialog>
                     <DialogTrigger asChild>
-                      <Button
-                        size="lg"
-                        className="bg-blue-600 hover:bg-blue-700 text-white text-xl py-4 px-8 rounded-xl h-auto"
+                      <div
+                        className="cursor-pointer bg-blue-600 hover:bg-blue-700 text-white text-xl py-4 px-8 rounded-xl h-auto inline-block transition-colors duration-200"
                         onClick={() => setSelectedHobby(dailyHobby)}
                       >
                         Learn More
-                      </Button>
+                      </div>
                     </DialogTrigger>
                     <DialogContent className="max-w-2xl">
                       <DialogHeader>
@@ -604,7 +576,7 @@ export default function HobbiesPage() {
         <section className="mb-12">
           <Card className="shadow-lg">
             <CardHeader className="text-center">
-              <CardTitle className="text-3xl font-bold text-gray-900 mb-4">Find Your Hobby!</CardTitle>
+              <CardTitle className="text-3xl font-bold text-gray-900 mb-4">Find your hobby or pick up a new hobby today!</CardTitle>
               <CardDescription className="text-xl text-gray-600">
                 Search or browse categories
               </CardDescription>
@@ -697,96 +669,95 @@ export default function HobbiesPage() {
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {category.hobbies.map((hobby, index) => (
-                      <Card key={index} className={`hover:shadow-lg transition-all duration-300 border-2 hover:border-green-300 ${category.id === 'active' ? 'bg-green-50 hover:bg-green-100' :
-                        category.id === 'creative' ? 'bg-purple-50 hover:bg-purple-100' :
-                          category.id === 'social' ? 'bg-blue-50 hover:bg-blue-100' :
-                            category.id === 'learning' ? 'bg-orange-50 hover:bg-orange-100' :
-                              category.id === 'service' ? 'bg-pink-50 hover:bg-pink-100' :
-                                'bg-teal-50 hover:bg-teal-100'
-                        }`}>
-                        <CardHeader className="text-center pb-4">
-                          <div className="text-5xl mb-4">{hobby.icon}</div>
-                          <CardTitle className="text-2xl font-bold text-gray-900">{hobby.name}</CardTitle>
-                          <CardDescription className="text-lg text-gray-600 leading-relaxed">
-                            {hobby.description}
-                          </CardDescription>
-                        </CardHeader>
-                        <CardContent className="text-center space-y-4">
-                          <Badge
-                            variant="secondary"
-                            className={`text-lg px-4 py-2 ${hobby.difficulty === 'Beginner' ? 'bg-green-100 text-green-800' :
-                              hobby.difficulty === 'Intermediate' ? 'bg-yellow-100 text-yellow-800' :
-                                'bg-red-100 text-red-800'
-                              }`}
+                      <Dialog key={index}>
+                        <DialogTrigger asChild>
+                          <div
+                            className="cursor-pointer"
+                            onClick={() => setSelectedHobby(hobby)}
                           >
-                            {hobby.difficulty}
-                          </Badge>
-                          <Dialog>
-                            <DialogTrigger asChild>
-                              <Button
-                                variant="outline"
-                                className="w-full h-12 text-lg border-2 hover:bg-green-50 hover:border-green-300"
-                                onClick={() => setSelectedHobby(hobby)}
-                              >
-                                Learn More
-                              </Button>
-                            </DialogTrigger>
-                            <DialogContent className="max-w-2xl">
-                              <DialogHeader>
-                                <DialogTitle className="text-3xl font-bold text-center mb-4">
-                                  {selectedHobby?.name}
-                                </DialogTitle>
-                                <DialogDescription className="text-xl text-center">
-                                  {selectedHobby?.intro}
-                                </DialogDescription>
-                              </DialogHeader>
-                              <div className="space-y-6">
-                                <div className="bg-gray-50 p-6 rounded-xl">
-                                  <h4 className="text-2xl font-bold text-gray-900 mb-3">Starter Guide</h4>
-                                  {selectedHobby?.starterGuide && (
-                                    <div className="space-y-4">
-                                      <div>
-                                        <h5 className="text-lg font-semibold text-gray-800 mb-2">Basic Items to Get:</h5>
-                                        <ul className="list-disc list-inside text-gray-700 space-y-1">
-                                          {selectedHobby.starterGuide.items.map((item, index) => (
-                                            <li key={index}>{item}</li>
-                                          ))}
-                                        </ul>
-                                      </div>
-                                      <div>
-                                        <h5 className="text-lg font-semibold text-gray-800 mb-2">Where to Buy:</h5>
-                                        <ul className="list-disc list-inside text-gray-700 space-y-1">
-                                          {selectedHobby.starterGuide.whereToBuy.map((place, index) => (
-                                            <li key={index}>{place}</li>
-                                          ))}
-                                        </ul>
-                                      </div>
-                                      <div>
-                                        <h5 className="text-lg font-semibold text-gray-800 mb-2">Nearest Places:</h5>
-                                        <ul className="list-disc list-inside text-gray-700 space-y-1">
-                                          {selectedHobby.starterGuide.nearestPlaces.map((place, index) => (
-                                            <li key={index}>{place}</li>
-                                          ))}
-                                        </ul>
-                                      </div>
-                                    </div>
-                                  )}
+                            <Card className={`hover:shadow-lg transition-all duration-300 border-2 hover:border-green-300 ${category.id === 'active' ? 'bg-green-50 hover:bg-green-100' :
+                              category.id === 'creative' ? 'bg-purple-50 hover:bg-purple-100' :
+                                category.id === 'social' ? 'bg-blue-50 hover:bg-blue-100' :
+                                  category.id === 'learning' ? 'bg-orange-50 hover:bg-orange-100' :
+                                    category.id === 'service' ? 'bg-pink-50 hover:bg-pink-100' :
+                                      'bg-teal-50 hover:bg-teal-100'
+                              }`}
+                            >
+                              <CardHeader className="text-center pb-4">
+                                <div className="text-5xl mb-4">{hobby.icon}</div>
+                                <CardTitle className="text-2xl font-bold text-gray-900">{hobby.name}</CardTitle>
+                                <CardDescription className="text-lg text-gray-600 leading-relaxed">
+                                  {hobby.description}
+                                </CardDescription>
+                              </CardHeader>
+                              <CardContent className="text-center space-y-4">
+                                <Badge
+                                  variant="secondary"
+                                  className={`text-lg px-4 py-2 ${hobby.difficulty === 'Beginner' ? 'bg-green-100 text-green-800' :
+                                    hobby.difficulty === 'Intermediate' ? 'bg-yellow-100 text-yellow-800' :
+                                      'bg-red-100 text-red-800'
+                                    }`}
+                                >
+                                  {hobby.difficulty}
+                                </Badge>
+                              </CardContent>
+                            </Card>
+                          </div>
+                        </DialogTrigger>
+                        <DialogContent className="max-w-2xl">
+                          <DialogHeader>
+                            <DialogTitle className="text-3xl font-bold text-center mb-4">
+                              {selectedHobby?.name}
+                            </DialogTitle>
+                            <DialogDescription className="text-xl text-center">
+                              {selectedHobby?.intro}
+                            </DialogDescription>
+                          </DialogHeader>
+                          <div className="space-y-6">
+                            <div className="bg-gray-50 p-6 rounded-xl">
+                              <h4 className="text-2xl font-bold text-gray-900 mb-3">Starter Guide</h4>
+                              {selectedHobby?.starterGuide && (
+                                <div className="space-y-4">
+                                  <div>
+                                    <h5 className="text-lg font-semibold text-gray-800 mb-2">Basic Items to Get:</h5>
+                                    <ul className="list-disc list-inside text-gray-700 space-y-1">
+                                      {selectedHobby.starterGuide.items.map((item, index) => (
+                                        <li key={index}>{item}</li>
+                                      ))}
+                                    </ul>
+                                  </div>
+                                  <div>
+                                    <h5 className="text-lg font-semibold text-gray-800 mb-2">Where to Buy:</h5>
+                                    <ul className="list-disc list-inside text-gray-700 space-y-1">
+                                      {selectedHobby.starterGuide.whereToBuy.map((place, index) => (
+                                        <li key={index}>{place}</li>
+                                      ))}
+                                    </ul>
+                                  </div>
+                                  <div>
+                                    <h5 className="text-lg font-semibold text-gray-800 mb-2">Nearest Places:</h5>
+                                    <ul className="list-disc list-inside text-gray-700 space-y-1">
+                                      {selectedHobby.starterGuide.nearestPlaces.map((place, index) => (
+                                        <li key={index}>{place}</li>
+                                      ))}
+                                    </ul>
+                                  </div>
                                 </div>
-                                <div className="text-center">
-                                  <Link href={`/community-classes?filter=${encodeURIComponent(hobby.name)}`}>
-                                    <Button
-                                      size="lg"
-                                      className="bg-green-600 hover:bg-green-700 text-white text-xl py-4 px-8 rounded-xl h-auto"
-                                    >
-                                      Join a Community Class
-                                    </Button>
-                                  </Link>
-                                </div>
-                              </div>
-                            </DialogContent>
-                          </Dialog>
-                        </CardContent>
-                      </Card>
+                              )}
+                            </div>
+                            <div className="text-center">
+                              <Link href={`/community-classes?filter=${encodeURIComponent(hobby.name)}`}>
+                                <Button
+                                  size="lg"
+                                  className="bg-green-600 hover:bg-green-700 text-white text-xl py-4 px-8 rounded-xl h-auto"
+                                >
+                                  Join a Community Class
+                                </Button>
+                              </Link>
+                            </div>
+                          </div>
+                        </DialogContent>
+                      </Dialog>
                     ))}
                   </div>
                 </div>

@@ -67,7 +67,7 @@
   body {
     @apply bg-background text-foreground;
     background: linear-gradient(135deg, rgba(245, 247, 250, 0.85) 0%, rgba(195, 207, 226, 0.85) 100%),
-                url('/icons/stock-image-20.jpg') center/cover;
+      url('/icons/stock-image-20.jpg') center/cover;
     background-attachment: fixed;
     min-height: 100vh;
   }
@@ -226,12 +226,618 @@
     box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
   }
 
+  /* Button Simple 3D Effect */
+  .button-3d {
+    position: relative;
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    /* Simple 3D positioning */
+    transform: translateY(-2px);
+    /* Clean shadow beneath */
+    box-shadow:
+      0 4px 12px rgba(37, 99, 235, 0.2),
+      0 2px 6px rgba(37, 99, 235, 0.15);
+    background: transparent;
+  }
+
+  /* Button Face with simple 3D effect */
+  .button-3d::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    border: 1px solid rgba(37, 99, 235, 0.2);
+    border-radius: 0.75rem;
+    z-index: 2;
+    /* Simple inset shadows */
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.3),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+  }
+
+  /* Remove the 3D structure elements - we'll use shadows instead */
+  .button-3d::after,
+  .button-3d .button-bottom,
+  .button-3d .button-left {
+    display: none;
+  }
+
+  /* Button Hover Effects - simple elevation */
+  .button-3d:hover {
+    transform: translateY(-3px);
+    box-shadow:
+      0 6px 20px rgba(37, 99, 235, 0.25),
+      0 3px 10px rgba(37, 99, 235, 0.2);
+  }
+
+  .button-3d:hover::before {
+    background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.4),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+  }
+
+  /* Button Active Effects - pressed down */
+  .button-3d:active {
+    transform: translateY(0px);
+    box-shadow:
+      0 2px 8px rgba(37, 99, 235, 0.2),
+      0 1px 4px rgba(37, 99, 235, 0.15);
+  }
+
+  .button-3d:active::before {
+    background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.2),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+  }
+
+  /* Button Text Normal */
+  .button-text-3d {
+    text-shadow: none;
+    font-weight: 600;
+    letter-spacing: normal;
+  }
+
+  /* Card Title Normal */
+  .card-title-3d {
+    text-shadow: none;
+    font-weight: 700;
+    letter-spacing: normal;
+    color: #2d3748;
+  }
+
+  /* Card Layered 3D Effect */
+  .card-3d {
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+    /* Default layered 3D shadow system */
+    box-shadow:
+      0 1px hsl(0, 0%, 95%),
+      0 2px hsl(0, 0%, 92%),
+      0 3px hsl(0, 0%, 90%),
+      0 4px hsl(0, 0%, 88%),
+      0 5px hsl(0, 0%, 86%),
+      0 6px hsl(0, 0%, 84%),
+      0 7px hsl(0, 0%, 82%),
+      0 8px hsl(0, 0%, 80%),
+      0 9px hsl(0, 0%, 78%),
+      0 10px hsl(0, 0%, 76%),
+      0 11px hsl(0, 0%, 74%),
+      0 12px hsl(0, 0%, 72%),
+      0 13px hsl(0, 0%, 70%),
+      0 14px hsl(0, 0%, 68%),
+      0 15px hsl(0, 0%, 66%),
+      0 16px hsl(0, 0%, 64%),
+      0 17px hsl(0, 0%, 62%),
+      0 18px hsl(0, 0%, 60%),
+      0 19px hsl(0, 0%, 58%),
+      0 20px hsl(0, 0%, 56%),
+      0 21px hsl(0, 0%, 54%),
+      0 22px hsl(0, 0%, 52%),
+      0 23px hsl(0, 0%, 50%),
+      0 24px hsl(0, 0%, 48%),
+      0 25px hsl(0, 0%, 46%),
+      0 26px hsl(0, 0%, 44%),
+      0 27px hsl(0, 0%, 42%),
+      0 28px hsl(0, 0%, 40%),
+      0 29px hsl(0, 0%, 38%),
+      0 30px hsl(0, 0%, 36%),
+      0 30px 10px hsla(0, 0%, 0%, 0.6),
+      0 32px 50px hsla(0, 0%, 0%, 0.3);
+  }
+
+  /* Card 1 - Peach Theme 3D Sides */
+  .feature-card-1.card-3d {
+    box-shadow:
+      0 1px #FFD4C4,
+      0 2px #FFD0BF,
+      0 3px #FFCCBA,
+      0 4px #FFC8B5,
+      0 5px #FFC4B0,
+      0 6px #FFC0AB,
+      0 7px #FFBCA6,
+      0 8px #FFB8A1,
+      0 9px #FFB49C,
+      0 10px #FFB097,
+      0 11px #FFAC92,
+      0 12px #FFA88D,
+      0 13px #FFA488,
+      0 14px #FFA083,
+      0 15px #FF9C7E,
+      0 16px #FF9879,
+      0 17px #FF9474,
+      0 18px #FF906F,
+      0 19px #FF8C6A,
+      0 20px #FF8865,
+      0 21px #FF8460,
+      0 22px #FF805B,
+      0 23px #FF7C56,
+      0 24px #FF7851,
+      0 25px #FF744C,
+      0 26px #FF7047,
+      0 27px #FF6C42,
+      0 28px #FF683D,
+      0 29px #FF6438,
+      0 30px #FF6033,
+      0 30px 10px hsla(0, 0%, 0%, 0.6),
+      0 32px 50px hsla(0, 0%, 0%, 0.3);
+  }
+
+  /* Card 2 - Mint Theme 3D Sides */
+  .feature-card-2.card-3d {
+    box-shadow:
+      0 1px #F8FFD8,
+      0 2px #F5FFD1,
+      0 3px #F2FFCA,
+      0 4px #EFFFC3,
+      0 5px #ECFFBC,
+      0 6px #E9FFB5,
+      0 7px #E6FFAE,
+      0 8px #E3FFA7,
+      0 9px #E0FFA0,
+      0 10px #DDFF99,
+      0 11px #DAFF92,
+      0 12px #D7FF8B,
+      0 13px #D4FF84,
+      0 14px #D1FF7D,
+      0 15px #CEFF76,
+      0 16px #CBFF6F,
+      0 17px #C8FF68,
+      0 18px #C5FF61,
+      0 19px #C2FF5A,
+      0 20px #BFFF53,
+      0 21px #BCFF4C,
+      0 22px #B9FF45,
+      0 23px #B6FF3E,
+      0 24px #B3FF37,
+      0 25px #B0FF30,
+      0 26px #ADFF29,
+      0 27px #AAFF22,
+      0 28px #A7FF1B,
+      0 29px #A4FF14,
+      0 30px #A1FF0D,
+      0 30px 10px hsla(0, 0%, 0%, 0.6),
+      0 32px 50px hsla(0, 0%, 0%, 0.3);
+  }
+
+  /* Card 3 - Sky Theme 3D Sides */
+  .feature-card-3.card-3d {
+    box-shadow:
+      0 1px #D4EDF2,
+      0 2px #D1E9EF,
+      0 3px #CEE5EC,
+      0 4px #CBE1E9,
+      0 5px #C8DDE6,
+      0 6px #C5D9E3,
+      0 7px #C2D5E0,
+      0 8px #BFD1DD,
+      0 9px #BCCDDA,
+      0 10px #B9C9D7,
+      0 11px #B6C5D4,
+      0 12px #B3C1D1,
+      0 13px #B0BDCE,
+      0 14px #ADB9CB,
+      0 15px #AAB5C8,
+      0 16px #A7B1C5,
+      0 17px #A4ADC2,
+      0 18px #A1A9BF,
+      0 19px #9EA5BC,
+      0 20px #9BA1B9,
+      0 21px #989DB6,
+      0 22px #9599B3,
+      0 23px #9295B0,
+      0 24px #8F91AD,
+      0 25px #8C8DAA,
+      0 26px #8989A7,
+      0 27px #8685A4,
+      0 28px #8381A1,
+      0 29px #807D9E,
+      0 30px #7D799B,
+      0 30px 10px hsla(0, 0%, 0%, 0.6),
+      0 32px 50px hsla(0, 0%, 0%, 0.3);
+  }
+
+  /* Card Face with layered 3D effect */
+  .card-3d::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: hsl(0, 0%, 98%);
+    border: none;
+    border-radius: 1.5rem;
+    z-index: 2;
+    /* Subtle inset highlight */
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.4),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.05);
+  }
+
+  /* Card 1 - Peach Theme */
+  .feature-card-1.card-3d::before {
+    background: linear-gradient(135deg, #FFCAAF 0%, #FFB89A 100%);
+  }
+
+  /* Card 2 - Mint Theme */
+  .feature-card-2.card-3d::before {
+    background: linear-gradient(135deg, #F1FFC4 0%, #E8FFB0 100%);
+  }
+
+  /* Card 3 - Sky Theme */
+  .feature-card-3.card-3d::before {
+    background: linear-gradient(135deg, #C6E2E9 0%, #B8D8E0 100%);
+  }
+
+  /* Remove the 3D structure elements - we'll use shadows instead */
+  .card-3d::after,
+  .card-3d .card-bottom,
+  .card-3d .card-left {
+    display: none;
+  }
+
+  /* Hover Effects - subtle layered shadows */
+  .card-3d:hover {
+    transform: translateY(-1px);
+    box-shadow:
+      0 1px hsl(0, 0%, 95%),
+      0 2px hsl(0, 0%, 92%),
+      0 3px hsl(0, 0%, 90%),
+      0 4px hsl(0, 0%, 88%),
+      0 5px hsl(0, 0%, 86%),
+      0 6px hsl(0, 0%, 84%),
+      0 7px hsl(0, 0%, 82%),
+      0 8px hsl(0, 0%, 80%),
+      0 9px hsl(0, 0%, 78%),
+      0 10px hsl(0, 0%, 76%),
+      0 11px hsl(0, 0%, 74%),
+      0 12px hsl(0, 0%, 72%),
+      0 13px hsl(0, 0%, 70%),
+      0 14px hsl(0, 0%, 68%),
+      0 15px hsl(0, 0%, 66%),
+      0 16px hsl(0, 0%, 64%),
+      0 17px hsl(0, 0%, 62%),
+      0 18px hsl(0, 0%, 60%),
+      0 19px hsl(0, 0%, 58%),
+      0 20px hsl(0, 0%, 56%),
+      0 21px hsl(0, 0%, 54%),
+      0 22px hsl(0, 0%, 52%),
+      0 23px hsl(0, 0%, 50%),
+      0 24px hsl(0, 0%, 48%),
+      0 25px hsl(0, 0%, 46%),
+      0 26px hsl(0, 0%, 44%),
+      0 27px hsl(0, 0%, 42%),
+      0 28px hsl(0, 0%, 40%),
+      0 29px hsl(0, 0%, 38%),
+      0 30px hsl(0, 0%, 36%),
+      0 31px hsl(0, 0%, 34%),
+      0 32px hsl(0, 0%, 32%),
+      0 33px hsl(0, 0%, 30%),
+      0 34px hsl(0, 0%, 28%),
+      0 35px hsl(0, 0%, 26%),
+      0 36px hsl(0, 0%, 24%),
+      0 37px hsl(0, 0%, 22%),
+      0 38px hsl(0, 0%, 20%),
+      0 39px hsl(0, 0%, 18%),
+      0 40px hsl(0, 0%, 16%),
+      0 40px 10px hsla(0, 0%, 0%, 0.7),
+      0 42px 50px hsla(0, 0%, 0%, 0.4);
+  }
+
+  /* Card 1 Hover - Peach Theme 3D Sides */
+  .feature-card-1.card-3d:hover {
+    box-shadow:
+      0 1px #FFD4C4,
+      0 2px #FFD0BF,
+      0 3px #FFCCBA,
+      0 4px #FFC8B5,
+      0 5px #FFC4B0,
+      0 6px #FFC0AB,
+      0 7px #FFBCA6,
+      0 8px #FFB8A1,
+      0 9px #FFB49C,
+      0 10px #FFB097,
+      0 11px #FFAC92,
+      0 12px #FFA88D,
+      0 13px #FFA488,
+      0 14px #FFA083,
+      0 15px #FF9C7E,
+      0 16px #FF9879,
+      0 17px #FF9474,
+      0 18px #FF906F,
+      0 19px #FF8C6A,
+      0 20px #FF8865,
+      0 21px #FF8460,
+      0 22px #FF805B,
+      0 23px #FF7C56,
+      0 24px #FF7851,
+      0 25px #FF744C,
+      0 26px #FF7047,
+      0 27px #FF6C42,
+      0 28px #FF683D,
+      0 29px #FF6438,
+      0 30px #FF6033,
+      0 31px #FF5C2E,
+      0 32px #FF5829,
+      0 33px #FF5424,
+      0 34px #FF501F,
+      0 35px #FF4C1A,
+      0 35px 8px hsla(0, 0%, 0%, 0.6),
+      0 37px 40px hsla(0, 0%, 0%, 0.3);
+  }
+
+  /* Card 2 Hover - Mint Theme 3D Sides */
+  .feature-card-2.card-3d:hover {
+    box-shadow:
+      0 1px #F8FFD8,
+      0 2px #F5FFD1,
+      0 3px #F2FFCA,
+      0 4px #EFFFC3,
+      0 5px #ECFFBC,
+      0 6px #E9FFB5,
+      0 7px #E6FFAE,
+      0 8px #E3FFA7,
+      0 9px #E0FFA0,
+      0 10px #DDFF99,
+      0 11px #DAFF92,
+      0 12px #D7FF8B,
+      0 13px #D4FF84,
+      0 14px #D1FF7D,
+      0 15px #CEFF76,
+      0 16px #CBFF6F,
+      0 17px #C8FF68,
+      0 18px #C5FF61,
+      0 19px #C2FF5A,
+      0 20px #BFFF53,
+      0 21px #BCFF4C,
+      0 22px #B9FF45,
+      0 23px #B6FF3E,
+      0 24px #B3FF37,
+      0 25px #B0FF30,
+      0 26px #ADFF29,
+      0 27px #AAFF22,
+      0 28px #A7FF1B,
+      0 29px #A4FF14,
+      0 30px #A1FF0D,
+      0 31px #9EFF06,
+      0 32px #9BFFFF,
+      0 33px #98FFF8,
+      0 34px #95FFF1,
+      0 35px #92FFEA,
+      0 35px 8px hsla(0, 0%, 0%, 0.6),
+      0 37px 40px hsla(0, 0%, 0%, 0.3);
+  }
+
+  /* Card 3 Hover - Sky Theme 3D Sides */
+  .feature-card-3.card-3d:hover {
+    box-shadow:
+      0 1px #D4EDF2,
+      0 2px #D1E9EF,
+      0 3px #CEE5EC,
+      0 4px #CBE1E9,
+      0 5px #C8DDE6,
+      0 6px #C5D9E3,
+      0 7px #C2D5E0,
+      0 8px #BFD1DD,
+      0 9px #BCCDDA,
+      0 10px #B9C9D7,
+      0 11px #B6C5D4,
+      0 12px #B3C1D1,
+      0 13px #B0BDCE,
+      0 14px #ADB9CB,
+      0 15px #AAB5C8,
+      0 16px #A7B1C5,
+      0 17px #A4ADC2,
+      0 18px #A1A9BF,
+      0 19px #9EA5BC,
+      0 20px #9BA1B9,
+      0 21px #989DB6,
+      0 22px #9599B3,
+      0 23px #9295B0,
+      0 24px #8F91AD,
+      0 25px #8C8DAA,
+      0 26px #8989A7,
+      0 27px #8685A4,
+      0 28px #8381A1,
+      0 29px #807D9E,
+      0 30px #7D799B,
+      0 31px #7A7598,
+      0 32px #777195,
+      0 33px #746D92,
+      0 34px #71698F,
+      0 35px #6E658C,
+      0 35px 8px hsla(0, 0%, 0%, 0.6),
+      0 37px 40px hsla(0, 0%, 0%, 0.3);
+  }
+
+  .card-3d:hover::before {
+    background: hsl(0, 0%, 99%);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.5),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.08);
+  }
+
+  /* Card 1 Hover - Peach Theme */
+  .feature-card-1.card-3d:hover::before {
+    background: linear-gradient(135deg, #FFD4C4 0%, #FFCAAF 100%);
+  }
+
+  /* Card 2 Hover - Mint Theme */
+  .feature-card-2.card-3d:hover::before {
+    background: linear-gradient(135deg, #F8FFD8 0%, #F1FFC4 100%);
+  }
+
+  /* Card 3 Hover - Sky Theme */
+  .feature-card-3.card-3d:hover::before {
+    background: linear-gradient(135deg, #D4EDF2 0%, #C6E2E9 100%);
+  }
+
+  /* Active Effects - pressed down */
+  .card-3d:active {
+    transform: translateY(5px);
+    box-shadow:
+      0 1px hsl(0, 0%, 95%),
+      0 2px hsl(0, 0%, 92%),
+      0 3px hsl(0, 0%, 90%),
+      0 4px hsl(0, 0%, 88%),
+      0 5px hsl(0, 0%, 86%),
+      0 6px hsl(0, 0%, 84%),
+      0 7px hsl(0, 0%, 82%),
+      0 8px hsl(0, 0%, 80%),
+      0 9px hsl(0, 0%, 78%),
+      0 10px hsl(0, 0%, 76%),
+      0 11px hsl(0, 0%, 74%),
+      0 12px hsl(0, 0%, 72%),
+      0 13px hsl(0, 0%, 70%),
+      0 14px hsl(0, 0%, 68%),
+      0 15px hsl(0, 0%, 66%),
+      0 16px hsl(0, 0%, 64%),
+      0 17px hsl(0, 0%, 62%),
+      0 18px hsl(0, 0%, 60%),
+      0 19px hsl(0, 0%, 58%),
+      0 20px hsl(0, 0%, 56%),
+      0 20px 5px hsla(0, 0%, 0%, 0.5),
+      0 22px 30px hsla(0, 0%, 0%, 0.25);
+  }
+
+  .card-3d:active::before {
+    background: hsl(0, 0%, 96%);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.3),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+  }
+
+  /* Card 1 Active - Peach Theme */
+  .feature-card-1.card-3d:active::before {
+    background: linear-gradient(135deg, #FFB89A 0%, #FFA680 100%);
+  }
+
+  /* Card 2 Active - Mint Theme */
+  .feature-card-2.card-3d:active::before {
+    background: linear-gradient(135deg, #E8FFB0 0%, #DFFF9C 100%);
+  }
+
+  /* Card 3 Active - Sky Theme */
+  .feature-card-3.card-3d:active::before {
+    background: linear-gradient(135deg, #B8D8E0 0%, #AACED7 100%);
+  }
+
+  /* Icon Static 3D Effect */
+  .icon-3d {
+    position: relative;
+    /* Static 3D positioning */
+    transform: translateY(-3px);
+    /* Static shadow beneath */
+    box-shadow:
+      0 8px 20px rgba(59, 130, 246, 0.2),
+      0 4px 10px rgba(59, 130, 246, 0.15),
+      0 2px 4px rgba(59, 130, 246, 0.1);
+  }
+
+  /* Icon Face with static 3D effect */
+  .icon-3d::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    border-radius: 50%;
+    z-index: 2;
+    /* Static inset shadows for 3D effect */
+    box-shadow:
+      inset 0 2px 0 rgba(255, 255, 255, 0.6),
+      inset 0 -2px 0 rgba(59, 130, 246, 0.15),
+      inset 2px 0 0 rgba(255, 255, 255, 0.4),
+      inset -2px 0 0 rgba(59, 130, 246, 0.15),
+      /* Additional depth shadow */
+      0 3px 6px rgba(59, 130, 246, 0.15);
+  }
+
+  /* Card 1 Icon - Peach Theme */
+  .feature-card-1 .icon-3d::before {
+    background: linear-gradient(135deg, #FFE4D6 0%, #FFD4C4 100%);
+    border: 1px solid rgba(255, 196, 175, 0.3);
+    box-shadow:
+      inset 0 2px 0 rgba(255, 255, 255, 0.6),
+      inset 0 -2px 0 rgba(255, 196, 175, 0.15),
+      inset 2px 0 0 rgba(255, 255, 255, 0.4),
+      inset -2px 0 0 rgba(255, 196, 175, 0.15),
+      0 3px 6px rgba(255, 196, 175, 0.15);
+  }
+
+  /* Card 2 Icon - Mint Theme */
+  .feature-card-2 .icon-3d::before {
+    background: linear-gradient(135deg, #F8FFE8 0%, #F1FFC4 100%);
+    border: 1px solid rgba(241, 255, 196, 0.3);
+    box-shadow:
+      inset 0 2px 0 rgba(255, 255, 255, 0.6),
+      inset 0 -2px 0 rgba(241, 255, 196, 0.15),
+      inset 2px 0 0 rgba(255, 255, 255, 0.4),
+      inset -2px 0 0 rgba(241, 255, 196, 0.15),
+      0 3px 6px rgba(241, 255, 196, 0.15);
+  }
+
+  /* Card 3 Icon - Sky Theme */
+  .feature-card-3 .icon-3d::before {
+    background: linear-gradient(135deg, #E8F4F8 0%, #C6E2E9 100%);
+    border: 1px solid rgba(198, 226, 233, 0.3);
+    box-shadow:
+      inset 0 2px 0 rgba(255, 255, 255, 0.6),
+      inset 0 -2px 0 rgba(198, 226, 233, 0.15),
+      inset 2px 0 0 rgba(255, 255, 255, 0.4),
+      inset -2px 0 0 rgba(198, 226, 233, 0.15),
+      0 3px 6px rgba(198, 226, 233, 0.15);
+  }
+
+  /* Remove the 3D structure elements - we'll use shadows instead */
+  .icon-3d::after,
+  .icon-3d .icon-bottom,
+  .icon-3d .icon-left {
+    display: none;
+  }
+
+  /* Icon Hover Effects - removed */
+  .icon-3d:hover {
+    /* No hover effects - icons remain static */
+  }
+
+  .icon-3d:hover::before {
+    /* No hover effects - icons remain static */
+  }
+
   /* Responsive design optimizations */
   @media (max-width: 768px) {
     body {
       background-attachment: scroll;
     }
-    
+
     .hero-background {
       margin: 0 16px;
       padding: 40px 24px;
@@ -240,42 +846,129 @@
 
   /* Mobile-first responsive typography */
   @media (max-width: 640px) {
-    .text-xs { font-size: 0.75rem; }
-    .text-sm { font-size: 0.875rem; }
-    .text-base { font-size: 1rem; }
-    .text-lg { font-size: 1.125rem; }
-    .text-xl { font-size: 1.25rem; }
-    .text-2xl { font-size: 1.5rem; }
-    .text-3xl { font-size: 1.875rem; }
-    .text-4xl { font-size: 2.25rem; }
-    .text-5xl { font-size: 3rem; }
-    .text-6xl { font-size: 3.75rem; }
+    .text-xs {
+      font-size: 0.75rem;
+    }
+
+    .text-sm {
+      font-size: 0.875rem;
+    }
+
+    .text-base {
+      font-size: 1rem;
+    }
+
+    .text-lg {
+      font-size: 1.125rem;
+    }
+
+    .text-xl {
+      font-size: 1.25rem;
+    }
+
+    .text-2xl {
+      font-size: 1.5rem;
+    }
+
+    .text-3xl {
+      font-size: 1.875rem;
+    }
+
+    .text-4xl {
+      font-size: 2.25rem;
+    }
+
+    .text-5xl {
+      font-size: 3rem;
+    }
+
+    .text-6xl {
+      font-size: 3.75rem;
+    }
   }
 
   @media (min-width: 641px) and (max-width: 768px) {
-    .text-xs { font-size: 0.75rem; }
-    .text-sm { font-size: 0.875rem; }
-    .text-base { font-size: 1rem; }
-    .text-lg { font-size: 1.125rem; }
-    .text-xl { font-size: 1.25rem; }
-    .text-2xl { font-size: 1.5rem; }
-    .text-3xl { font-size: 1.875rem; }
-    .text-4xl { font-size: 2.25rem; }
-    .text-5xl { font-size: 3rem; }
-    .text-6xl { font-size: 3.75rem; }
+    .text-xs {
+      font-size: 0.75rem;
+    }
+
+    .text-sm {
+      font-size: 0.875rem;
+    }
+
+    .text-base {
+      font-size: 1rem;
+    }
+
+    .text-lg {
+      font-size: 1.125rem;
+    }
+
+    .text-xl {
+      font-size: 1.25rem;
+    }
+
+    .text-2xl {
+      font-size: 1.5rem;
+    }
+
+    .text-3xl {
+      font-size: 1.875rem;
+    }
+
+    .text-4xl {
+      font-size: 2.25rem;
+    }
+
+    .text-5xl {
+      font-size: 3rem;
+    }
+
+    .text-6xl {
+      font-size: 3.75rem;
+    }
   }
 
   @media (min-width: 769px) {
-    .text-xs { font-size: 0.75rem; }
-    .text-sm { font-size: 0.875rem; }
-    .text-base { font-size: 1rem; }
-    .text-lg { font-size: 1.125rem; }
-    .text-xl { font-size: 1.25rem; }
-    .text-2xl { font-size: 1.5rem; }
-    .text-3xl { font-size: 1.875rem; }
-    .text-4xl { font-size: 2.25rem; }
-    .text-5xl { font-size: 3rem; }
-    .text-6xl { font-size: 3.75rem; }
+    .text-xs {
+      font-size: 0.75rem;
+    }
+
+    .text-sm {
+      font-size: 0.875rem;
+    }
+
+    .text-base {
+      font-size: 1rem;
+    }
+
+    .text-lg {
+      font-size: 1.125rem;
+    }
+
+    .text-xl {
+      font-size: 1.25rem;
+    }
+
+    .text-2xl {
+      font-size: 1.5rem;
+    }
+
+    .text-3xl {
+      font-size: 1.875rem;
+    }
+
+    .text-4xl {
+      font-size: 2.25rem;
+    }
+
+    .text-5xl {
+      font-size: 3rem;
+    }
+
+    .text-6xl {
+      font-size: 3.75rem;
+    }
   }
 
   /* Print-friendly styles */
@@ -301,6 +994,7 @@
 
 /* Font Size Scaling - Applied globally without affecting functionality */
 @layer base {
+
   /* Font size scaling variables */
   :root {
     --font-size-multiplier: 1;
@@ -312,9 +1006,30 @@
   }
 
   /* Scale all text elements proportionally */
-  h1, h2, h3, h4, h5, h6,
-  p, span, div, a, button, input, textarea, select,
-  .text-xs, .text-sm, .text-base, .text-lg, .text-xl, .text-2xl, .text-3xl, .text-4xl, .text-5xl, .text-6xl {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  span,
+  div,
+  a,
+  button,
+  input,
+  textarea,
+  select,
+  .text-xs,
+  .text-sm,
+  .text-base,
+  .text-lg,
+  .text-xl,
+  .text-2xl,
+  .text-3xl,
+  .text-4xl,
+  .text-5xl,
+  .text-6xl {
     font-size: calc(1em * var(--font-size-multiplier)) !important;
   }
 
@@ -325,19 +1040,23 @@
 
   /* Font size classes for different scales */
   .font-size-small {
-    --font-size-multiplier: 0.75; /* 12px base */
+    --font-size-multiplier: 0.75;
+    /* 12px base */
   }
 
   .font-size-medium {
-    --font-size-multiplier: 0.875; /* 14px base */
+    --font-size-multiplier: 0.875;
+    /* 14px base */
   }
 
   .font-size-large {
-    --font-size-multiplier: 1; /* 16px base */
+    --font-size-multiplier: 1;
+    /* 16px base */
   }
 
   .font-size-extra-large {
-    --font-size-multiplier: 1.125; /* 18px base */
+    --font-size-multiplier: 1.125;
+    /* 18px base */
   }
 }
 
@@ -377,7 +1096,8 @@ body.font-size-extra-large {
 
 /* Global font size application */
 body {
-  font-size: 16px; /* Default base size */
+  font-size: 16px;
+  /* Default base size */
 }
 
 /* Apply font size scaling to all text elements */
