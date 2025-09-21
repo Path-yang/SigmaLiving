@@ -54,14 +54,6 @@ export default function RootLayout({
                   {children}
                 </main>
                 
-                <footer className="bg-white/95 backdrop-blur-md border-t border-gray-200/50 mt-16">
-                  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                    <div className="text-center text-gray-600">
-                      <p>© 2024 SilverSigma. Designed with love for seniors in Singapore.</p>
-                    </div>
-                  </div>
-                </footer>
-                
                 {/* Bottom Navigation - Mobile Only */}
                 <div className="fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-t border-gray-200/50 shadow-lg">
                   <Navigation />
