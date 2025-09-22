@@ -2,10 +2,6 @@
 
 A comprehensive senior-focused web application designed to enhance quality of life through AI companionship, hobby exploration, and social connectivity. Built with modern web technologies and accessibility-first design principles.
 
-## 🌟 Live Demo
-
-**🌐 Live Application:** [View SilverSigma](https://silversigma.vercel.app)
-
 ## 🚀 Key Features
 
 ### 🤖 AI Companion with Interactive Avatar
