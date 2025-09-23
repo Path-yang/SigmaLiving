@@ -289,4 +289,4 @@ For questions, issues, or contributions:
 
 ---
 
-*Building technology that makes life better for seniors, one feature at a time.*
+*Building technology that makes life better for seniors, one feature at a time. 🚀*
