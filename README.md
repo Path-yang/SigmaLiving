@@ -2,7 +2,7 @@
 
 A comprehensive senior-focused web application designed to enhance quality of life through AI companionship, hobby exploration, and social connectivity. Built with modern web technologies and accessibility-first design principles.
 
-## 🚀 Key Features
+## 🚀 Key Features ✨
 
 ### 🤖 AI Companion with Interactive Avatar
 - **Real-time Voice Chat**: Powered by HeyGen streaming avatar technology
